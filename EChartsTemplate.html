@@ -8,7 +8,7 @@
     <script src="js/build/source/echarts-all.js"></script>
     <script>
         $(function() {
-            var myChart = echarts.init(document.getElementById('divLabel'));
+            var myChart = echarts.init(document.getElementById('divTemplate'));
             myChart.showLoading({
                 effect:'dynamicLine',
                 textStyle: {
@@ -26,7 +26,7 @@
 </head>
 
 <body>
-    <div id="divLabel" style="width:900px; height:400px; "></div>
+    <div id="divTemplate" style="width:900px; height:400px; "></div>
 </body>
 
 </html>
