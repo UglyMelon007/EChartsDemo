@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>UglyMelon007 EChartsDemo</title>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/build/source/echarts.js"></script>
+    <script>
+        $(function() {
+            require.config({
+                paths: {
+                    echarts: 'js/build/source'
+                }
+            });
+            require(
+                [
+                    'echarts',
+                    'echarts/chart/line'
+                ],
+                function(ecs) {
+                    var myEchart = ecs.init(document.getElementById('divModule'));
+                    var ecsConfig = require('echarts/config');
+					myEchart.showLoading({
+						effect:'bubble',
+						textStyle: {
+							fontSize: 20
+						}
+					});
+                    var option = {
+                        title: {
+                            text: '标题',
+                            x: 'center'
+                        },
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        legend: {
+                            data: ['hello', 'world'],
+                            y: 'bootom'
+                        },
+                        xAxis: [{
+                            type: 'category',
+                            boundaryGap: false,
+                            data: ['hello', 'world', '!!']
+                        }],
+                        yAxis: [{
+                            type: 'value'
+                        }],
+                        series: [{
+                            name: 'hello',
+                            type: 'line',
+                            stack: '总量',
+                            data: [120, 122, 133]
+                        }, {
+                            name: 'world',
+                            type: 'line',
+                            stack: '总量',
+                            data: [120, 122, 144]
+                        }]
+					};
+					setTimeout(function(){
+						myEchart.hideLoading();
+						myEchart.setOption(option);
+					}, 2000);
+                });
+        })
+    </script>
+</head>
+
+<body>
+    <div id="divModule" style="width:900px; height:400px"></div>
+</body>
+
+</html>
+
