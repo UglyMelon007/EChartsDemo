@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>UglyMelon007 EChartsDemo</title>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/build/source/echarts-all.js"></script>
+    <script>
+        $(function() {
+            var myChart = echarts.init(document.getElementById('divLine'));
+            myChart.showLoading({
+				text: '数据加载中。。。。',
+                effect:'dynamicLine',
+                textStyle: {
+                    fontSize: 20
+                }
+			});
+
+			var publicOption = {
+				backgroundColor: '#DDF0ED',
+				color:[
+					'rgba(255, 255, 255, 0.8)',
+					'#ff7f50', '#87cefa'
+				],
+				renderAsImage: false, //是否渲染为图片
+
+				calculable: false,                           // 是否启用拖拽重计算特性
+				calculableColor: 'rgba(255, 203, 212, 0.8)', // 拖拽重计算提示边框颜色
+				calculableHoldreColor: '#CDA1A2',            // 可计算占位提示颜色
+				nameConnector: '&',                          // 数据合并名字间连接符
+				valueConnector: '-',                         // 数据合并名字与数值间连接符
+
+				animation: true,              // 是否启用图表初始化动画
+				addDataAnimation: true,       // 是否启用动态数据接口动画效果
+				animationThreshold: 2500,     // 动画元素阀值
+				animationDuration: 2000,      // 进入动画时长，单位ms
+				animationDurationUpdate: 500, // 更新动画时长，单位ms
+				animationEasing: 'Linear',    // 主元素的缓动效果
+			};
+
+			var publicSeriesOption = {
+				zlevel: 0,            // 一级层叠控制
+				z: 2,                 // 二级层叠控制
+				type: 'line',         // 图表类型
+				name：'hello',        // 系列名称，该值将与legend索引相关
+				clickable:false,      // 数据图形是否可点击，默认开启，如没有click事件响应可关闭
+			};
+
+			var rectangularSeries = {
+				stack: 'hello', //组合名称
+				xAxisIndex: 0, //xAxis坐标轴数组的索引
+				yAxisIndex: 0, //yAxis坐标轴数组的索引
+
+				barGap: '30%',         // 柱间距离
+				barCategoryGap: '20%', // 类目间柱形距离
+				barBinHeight: 0,       // 柱条最小高度
+				//barWidth 柱条宽度，不设时自适应
+				//barMaxWidth 柱条最大宽度，不设时自适应
+
+				symbol: 'droplet',    // 标志图形类型
+				symbolSize: 2,	      // 标志图形大小
+				showAllSymbol: false, // 标志图形只有主轴显示
+				//symbolRotate 标志图形旋转角度
+
+				smooth: false,        // 平滑曲线显示，为true时lineStyle不支持曲线
+				dataFilter: 'nearst', // 优化方法 EChart会在折线图的数据量大于实际显示像素时启动优化
+				large: false,         // 启动大规模散点图
+				largeThreshold: 2000, // 大规模散点图自动切换阀值，large为true有效
+				legendHoveLink: true, // 是否启用（legend)hover时的联动响应
+			};
+
+			var lineStyle = {
+				color: 'green', //线条颜色
+				type: 'solid', //线条样式
+				width: 1, //线宽
+				shadowColor : 'rgba(0,0,0,0.5)',//折线主线有效(ie8+),阴影色彩
+				shadowBlur: 10, //阴影模糊度
+				shadowOffsetX: 8,//阴影横向偏移
+				shadowOffsetY: 8,//阴影纵向偏移
+			};
+
+			var areaStyle = {
+				color : '#FFCBD4', // 填充色，红色渐变
+				type: 'default',   // 填充样式，目前支持'default'(实填充）
+			};
+			var normalItem = {
+				color: 'red',            // Item颜色
+				borderColor: 'grap',     // 边框颜色
+				borderWidth: 1,          // 边框宽度，单位px
+				labelLine: {show: true}, // 标签视觉引导线
+
+				barBorderColor: '#fff',        // 柱边框颜色
+				barBorderRadius: [5, 5, 0, 0], // 柱形边框圆角单位px，左上，右上，右下，左下，也可传一个统一值
+				barBorderWidth: 0,             // 柱边框宽度
+
+
+				lineStyle: lineStyle,   // 线条样式
+				areaStyle：areaStyle,   // 区域样式
+				//chordStyle: chordStyle, // 弦样式
+				//nodeStyle: nodeStyle,   // 节点样式
+				//linkStyle: linkStyle,   // 边样式
+			};
+
+			var textStyle = {
+				color: '#6BB9F0',
+				decoration:
+			};
+
+			var label = {
+				show: true, //是否显示标签
+				//position: 标签显示位置，根据不同类型选择不同
+				rotate: false, //和弦图有效，文本标签自动旋转
+				distance: 10, //距离， 和弦图: 文本标签旋转后于弦的间隔 饼图: 当label position为inner时有效，为label位置到圆心的距离与圆半径(环状图为内外半径和)的比例系数，默认为0.5
+				formatter: null, //标签文本格式器
+				textStyle: textStyle, //标签文本样式
+				//x: 仅矩形树图使用，标签横坐标
+				//y: 仅矩形树图使用，标签纵坐标
+			};
+
+			var emphasisItem = {
+				color: 'red',            // Item颜色
+				borderColor: 'blue',     // 边框颜色
+				borderWidth: 1,          // 边框宽度，单位px
+				labelLine: {show: true}, // 标签视觉引导线
+
+				barBorderColor: '#fff',        // 柱边框颜色
+				barBorderRadius: [5, 5, 0, 0], // 柱形边框圆角单位px，左上，右上，右下，左下，也可传一个统一值
+				barBorderWidth: 0,             // 柱边框宽度
+
+
+				label: label,         // 标签（对象）
+				lineStyle: lineStyle, // 线条样式（对象）
+				areaStyle：areaStyle, // 区域样式（对象）
+				//chordStyle: chordStyle, // 弦样式（对象）
+				//nodeStyle: nodeStyle,   // 节点样式（对象）
+				//linkStyle: linkStyle,   // 边样式（对象）
+			};
+
+			var itemStyle = {
+				normal: normalItem,     // 常规item样式（对象）
+				emphasis: emphasisItem, // 重点item样式（对象）
+			}
+
+			var markPoint = {
+			};
+
+			var dataOne = publicSeriesOption + {
+				itemStyle: itemStyle, // 图形样式（对象）
+				markPoint: markPoint, // 标注（对象）
+				markLine: markLine,   // 标线（对象）
+				tooltip: tooltip,     // 提示框样式，仅对本系列有效，如不用则用option.tooltip
+				data: data,           // 数据（对象）
+			};
+
+			var series = dataOne;
+
+            var option = publicOption + {
+				series: series; //驱动图表生成的数据内容数组（对象）
+			};
+
+            timeoutHandle = setTimeout(function() {
+				myChart.hideLoading(); 
+				myChart.setOption(option);
+            }, 3000);
+        });
+    </script>
+</head>
+
+<body>
+    <div id="divLine" style="width:900px; height:400px; "></div>
+</body>
+
+</html>
+
