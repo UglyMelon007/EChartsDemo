@@ -10,161 +10,577 @@
         $(function() {
             var myChart = echarts.init(document.getElementById('divLine'));
             myChart.showLoading({
-				text: '数据加载中。。。。',
-                effect:'dynamicLine',
+                text: '数据加载中。。。。',
+                effect: 'dynamicLine',
                 textStyle: {
                     fontSize: 20
                 }
-			});
+            });
+			//各种样式{{{
+            var areaStyle = {//区域填充样式
+                color: '#90DCDD', // 填充色
+                type: 'default', // 填充样式，目前支持'default'(实填充）
+            };
 
-			var publicOption = {
-				backgroundColor: '#DDF0ED',
-				color:[
-					'rgba(255, 255, 255, 0.8)',
-					'#ff7f50', '#87cefa'
-				],
-				renderAsImage: false, //是否渲染为图片
+            var lineStyle = { //线条样式
+                color: '#61D3D5', //线条颜色
+                type: 'solid', //线条样式
+                width: 2, //线宽
+                shadowColor: 'rgba(0,0,0,0.5)', //折线主线有效(ie8+),阴影色彩
+                shadowBlur: 10, //阴影模糊度
+                shadowOffsetX: 8, //阴影横向偏移
+                shadowOffsetY: 8, //阴影纵向偏移
+            };
 
-				calculable: false,                           // 是否启用拖拽重计算特性
-				calculableColor: 'rgba(255, 203, 212, 0.8)', // 拖拽重计算提示边框颜色
-				calculableHoldreColor: '#CDA1A2',            // 可计算占位提示颜色
-				nameConnector: '&',                          // 数据合并名字间连接符
-				valueConnector: '-',                         // 数据合并名字与数值间连接符
+            var textStyle = { //文字样式
+                color: '#333333', //颜色
+                decoration: 'none', //修饰，仅对tooltip.textStyle生效
+                //align 水平对齐方式
+                //baseLine 垂直对齐方式
+                fontFamily: 'Arial, Verdana, sans-serif', //字体系列
+                fontSize: 12, //字体大小
+                fontStyle: 'normal', //字体样式
+                fontWeight: 'normal', //粗细
+            };
 
-				animation: true,              // 是否启用图表初始化动画
-				addDataAnimation: true,       // 是否启用动态数据接口动画效果
-				animationThreshold: 2500,     // 动画元素阀值
-				animationDuration: 2000,      // 进入动画时长，单位ms
-				animationDurationUpdate: 500, // 更新动画时长，单位ms
-				animationEasing: 'Linear',    // 主元素的缓动效果
-			};
+			var label = {//->normalItem emphasisItem
+                show: true, //是否显示标签
+                //position: 标签显示位置，根据不同类型选择不同
+                rotate: false, // 和弦图有效，文本标签自动旋转
+                distance: 10, // 距离， 和弦图: 文本标签旋转后于弦的间隔 饼图: 当label position为inner时有效，为label位置到圆心的距离与圆半径(环状图为内外半径和)的比例系数，默认为0.5
+                formatter: null, // 标签文本格式器
+                textStyle: textStyle, // 标签文本样式
+                //x: 仅矩形树图使用，标签横坐标
+                //y: 仅矩形树图使用，标签纵坐标
+            };
 
-			var publicSeriesOption = {
-				zlevel: 0,            // 一级层叠控制
-				z: 2,                 // 二级层叠控制
-				type: 'line',         // 图表类型
-				name：'hello',        // 系列名称，该值将与legend索引相关
-				clickable:false,      // 数据图形是否可点击，默认开启，如没有click事件响应可关闭
-			};
+			var normalItem = {//->itemSytle
+                color: 'red', // Item颜色
+                borderColor: 'grap', // 边框颜色
+                borderWidth: 1, // 边框宽度，单位px
+                labelLine: {
+                    show: true
+                }, // 标签视觉引导线
 
-			var rectangularSeries = {
-				stack: 'hello', //组合名称
-				xAxisIndex: 0, //xAxis坐标轴数组的索引
-				yAxisIndex: 0, //yAxis坐标轴数组的索引
+                barBorderColor: '#fff', // 柱边框颜色
+                barBorderRadius: [5, 5, 0, 0], // 柱形边框圆角单位px，左上，右上，右下，左下，也可传一个统一值
+                barBorderWidth: 0, // 柱边框宽度
 
-				barGap: '30%',         // 柱间距离
-				barCategoryGap: '20%', // 类目间柱形距离
-				barBinHeight: 0,       // 柱条最小高度
-				//barWidth 柱条宽度，不设时自适应
-				//barMaxWidth 柱条最大宽度，不设时自适应
+                label: label,
+                lineStyle: lineStyle, // 线条样式
+                areaStyle: areaStyle, // 区域样式
+                //chordStyle: chordStyle, // 弦样式
+                //nodeStyle: nodeStyle,   // 节点样式
+                //linkStyle: linkStyle,   // 边样式
+            };
 
-				symbol: 'droplet',    // 标志图形类型
-				symbolSize: 2,	      // 标志图形大小
-				showAllSymbol: false, // 标志图形只有主轴显示
-				//symbolRotate 标志图形旋转角度
+			var emphasisItem = {//->itemStyle
+                color: 'red', // Item颜色
+                borderColor: 'blue', // 边框颜色
+                borderWidth: 1, // 边框宽度，单位px
+                labelLine: {
+                    show: true
+                }, // 标签视觉引导线
 
-				smooth: false,        // 平滑曲线显示，为true时lineStyle不支持曲线
-				dataFilter: 'nearst', // 优化方法 EChart会在折线图的数据量大于实际显示像素时启动优化
-				large: false,         // 启动大规模散点图
-				largeThreshold: 2000, // 大规模散点图自动切换阀值，large为true有效
-				legendHoveLink: true, // 是否启用（legend)hover时的联动响应
-			};
-
-			var lineStyle = {
-				color: 'green', //线条颜色
-				type: 'solid', //线条样式
-				width: 1, //线宽
-				shadowColor : 'rgba(0,0,0,0.5)',//折线主线有效(ie8+),阴影色彩
-				shadowBlur: 10, //阴影模糊度
-				shadowOffsetX: 8,//阴影横向偏移
-				shadowOffsetY: 8,//阴影纵向偏移
-			};
-
-			var areaStyle = {
-				color : '#FFCBD4', // 填充色，红色渐变
-				type: 'default',   // 填充样式，目前支持'default'(实填充）
-			};
-			var normalItem = {
-				color: 'red',            // Item颜色
-				borderColor: 'grap',     // 边框颜色
-				borderWidth: 1,          // 边框宽度，单位px
-				labelLine: {show: true}, // 标签视觉引导线
-
-				barBorderColor: '#fff',        // 柱边框颜色
-				barBorderRadius: [5, 5, 0, 0], // 柱形边框圆角单位px，左上，右上，右下，左下，也可传一个统一值
-				barBorderWidth: 0,             // 柱边框宽度
+                barBorderColor: '#fff', // 柱边框颜色
+                barBorderRadius: [5, 5, 0, 0], // 柱形边框圆角单位px，左上，右上，右下，左下，也可传一个统一值
+                barBorderWidth: 0, // 柱边框宽度
 
 
-				lineStyle: lineStyle,   // 线条样式
-				areaStyle：areaStyle,   // 区域样式
-				//chordStyle: chordStyle, // 弦样式
-				//nodeStyle: nodeStyle,   // 节点样式
-				//linkStyle: linkStyle,   // 边样式
-			};
+                label: label, // 标签（对象）
+                lineStyle: lineStyle, // 线条样式（对象）
+                areaStyle: areaStyle, // 区域样式（对象）
+                //chordStyle: chordStyle, // 弦样式（对象）
+                //nodeStyle: nodeStyle,   // 节点样式（对象）
+                //linkStyle: linkStyle,   // 边样式（对象）
+            };
 
-			var textStyle = {
-				color: '#6BB9F0',
-				decoration:
-			};
+            var itemStyle = {//图形样式
+                normal: normalItem, // 常规item样式（对象）
+                emphasis: emphasisItem, // 重点item样式（对象）
+            };
+			//}}}
 
-			var label = {
-				show: true, //是否显示标签
-				//position: 标签显示位置，根据不同类型选择不同
-				rotate: false, //和弦图有效，文本标签自动旋转
-				distance: 10, //距离， 和弦图: 文本标签旋转后于弦的间隔 饼图: 当label position为inner时有效，为label位置到圆心的距离与圆半径(环状图为内外半径和)的比例系数，默认为0.5
-				formatter: null, //标签文本格式器
-				textStyle: textStyle, //标签文本样式
-				//x: 仅矩形树图使用，标签横坐标
-				//y: 仅矩形树图使用，标签纵坐标
-			};
+			//markPoint{{{
+			var markPointEffect = { //标注图形炫光特效->markPoint
+                show: false, //是否开启
+                type: 'scale', //炫光特效
+                loop: true, //循环动画
+                period: 15, //运动周期，值越大越慢
+                scaleSize: 2, //放大倍数
+                bounceDistance: 10, //跳动距离，type为'bounce'时有效
+                color: null, //炫光颜色,默认跟随mark point itemStyle颜色
+                shadowColor: null, //光影颜色,默认跟随color,
+                shadowBlur: 0, //光影模糊度
+            };
 
-			var emphasisItem = {
-				color: 'red',            // Item颜色
-				borderColor: 'blue',     // 边框颜色
-				borderWidth: 1,          // 边框宽度，单位px
-				labelLine: {show: true}, // 标签视觉引导线
+			var markPointDataOne = [ //直接指定位置，名称，值
+                {
+                    name: '标注1',
+                    value: 100,
+                    x: 50,
+                    y: 20,
+                }, {
+                    name: '标注2',
+                    value: 200,
+                    x: 150,
+                    y: 120,
+                },
+            ];
 
-				barBorderColor: '#fff',        // 柱边框颜色
-				barBorderRadius: [5, 5, 0, 0], // 柱形边框圆角单位px，左上，右上，右下，左下，也可传一个统一值
-				barBorderWidth: 0,             // 柱边框宽度
+            var markPointDataTwo = [ //基于直角系定位，通过xAsis,yAxis实现
+                {
+                    name: '标注1',
+                    value: 100,
+                    xAxis: 1,
+                    yAxis: 2,
+                }, // 当xAxis为类目轴时，数值1会被理解为类目轴的index
+                {
+                    name: '标注2',
+                    value: 150,
+                    xAxis: 'Tuesday',
+                    yAxis: 4,
+                }, // 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+                {
+                    name: '标注3',
+                    value: 200,
+                    xAxis: 5,
+                    yAxis: 4,
+                }, // 当xAxis或yAxis为数值轴时，不管传入是什么，都被理解为数值后做空间位置换算			
+            ];
 
+            var markPointDataThree = [ //开箱即用的特殊点标注
+                {
+                    type: 'max',
+                    name: '自定义名字'
+                }, // 最大值
+                {
+                    type: 'min',
+                    name: '自定义名字'
+                } // 最小值
+            ];
 
-				label: label,         // 标签（对象）
-				lineStyle: lineStyle, // 线条样式（对象）
-				areaStyle：areaStyle, // 区域样式（对象）
-				//chordStyle: chordStyle, // 弦样式（对象）
-				//nodeStyle: nodeStyle,   // 节点样式（对象）
-				//linkStyle: linkStyle,   // 边样式（对象）
-			};
+            var markPointDataFour = [ //地图标注，除了直接位置定位外，如果希望基于地理坐标标注，并且能够随地图漫游缩放，需要为markPoint提供一份geoCoord
+                {
+                    name: '北京',
+                    value: 100
+                }, {
+                    name: '上海',
+                    value: 200
+                },
+            ];
 
-			var itemStyle = {
-				normal: normalItem,     // 常规item样式（对象）
-				emphasis: emphasisItem, // 重点item样式（对象）
-			}
+            var markPointData = markPointDataTwo; //标注图形数据 四种类型
 
-			var markPoint = {
-			};
+            var markPoint = { //系列中的数据标注内容
+                clickable: true, // 数据图形是否可点击
+                symbol: 'pin', // 标注类型
+                symbolSize: 10, // 标注大小
+                symbolRotate: null, // 标注图形旋转角度
+                large: false, // 是否启动大规模标注模式
+                effect: markPointEffect, // 标注图形炫光特效（对象）
+                itemStyle: itemStyle, // 标注图形样式属性（对象）
+                data: markPointData, // 标注图形数据
+                //geoCoord  当为第四种类型时可能需要此项（对象）
+            };
+			//}}}
 
-			var dataOne = publicSeriesOption + {
-				itemStyle: itemStyle, // 图形样式（对象）
-				markPoint: markPoint, // 标注（对象）
-				markLine: markLine,   // 标线（对象）
-				tooltip: tooltip,     // 提示框样式，仅对本系列有效，如不用则用option.tooltip
-				data: data,           // 数据（对象）
-			};
+			//markLine{{{
+			var markLineBundling = { //边捆绑->markLine
+                enable: false, // 是否启用
+                maxTurningAngle: 45, // 边捆绑算法参数,可选 [0, 90] 的角度
+            };
 
-			var series = dataOne;
+			var markLineEffect = {//->markLine
+                show: false, // 是否开启，默认关闭
+                loop: true, // 循环动画，默认开启,
+                period: 15, // 运动周期，无单位，值越大越慢，默认为15
+                scaleSize: 2, // 放大倍数，以markLine lineWidth为基准
+                color: null, // 炫光颜色，默认跟随markLine itemStyle定义颜色
+                shadowColor: null, // 光影颜色，默认跟随color
+                shadowBlur: null, // 光影模糊度，默认根据scaleSize计算
+            };
 
-            var option = publicOption + {
-				series: series; //驱动图表生成的数据内容数组（对象）
-			};
+            var markLineDataOne = [ //直接指定位置（起始，结束），相关名称，和值
+                [{
+                    name: '标线1起点',
+                    value: 100,
+                    x: 50,
+                    y: 20,
+                }, {
+                    name: '标线1终点',
+                    x: 150,
+                    y: 120,
+                }],
+                [{
+                    name: '标线2起点',
+                    value: 200,
+                    x: 30,
+                    y: 80,
+                }, {
+                    name: '标线2终点',
+                    x: 270,
+                    y: 190,
+                }],
+            ];
+
+            var markLineDataTwo = [ //基于直角系的定位，可以通过xAxis，yAxis实现，这两个值都会根据坐标轴类型以及传入参数的不同自动换算
+                [{
+                        name: '标线1起点',
+                        value: 100,
+                        xAxis: 1,
+                        yAxis: 2,
+                    }, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+                    {
+                        name: '标线1终点',
+                        xAxis: 'Tuesday',
+                        yAxis: 4,
+                    }, // 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+                ],
+                [{
+                        name: '标线2起点',
+                        value: 200,
+                        xAxis: 2,
+                        yAxis: 2,
+                    }, // 当xAxis或yAxis为数值轴时，不管传入是什么，都被理解为数值后做空间位置换算
+                    {
+                        name: '标线2终点',
+                        xAxis: 'Tuesday',
+                        yAxis: 4,
+                    }
+                ],
+            ];
+
+            var markLineDataThree = [ //几个开箱即用的特殊点作为标线类型
+                {
+                    type: 'max',
+                    name: '自定义名字',
+                }, // 最大值水平线或垂直线
+                {
+                    type: 'min',
+                    name: '自定义名字',
+                }, // 最小值水平线或垂直线
+                {
+                    type: 'average',
+                    name: '自定义名字',
+                }, // 平均值水平线或垂直线
+                // 最小值指向最大值的连线
+                [{
+                    type: 'min',
+                    name: '自定义名字',
+                }, {
+                    type: 'max',
+                    name: '自定义名字',
+                }],
+                // 散点图中存在两个数值型坐标，默认用纵轴值计算特殊点，可以通过valueIndex:0指定为横轴特殊点
+                {
+                    type: 'max',
+                    name: '自定义名字',
+                    valueIndex: 0,
+                }
+            ];
+
+            var markLineDataFour = [ //地图上，除了直接位置定位外，如果希望基于地理坐标标线
+                [{
+                    name: '北京',
+                    value: 100,
+                }, {
+                    name: '上海',
+                }],
+                [{
+                    name: '北京',
+                    value: 100,
+                }, {
+                    name: '广州',
+                }],
+            ];
+
+            var markLineData = markLineDataTwo; //标线的数据内容 四种类型
+
+            var markLine = { //系列中的数据标线内容
+                clickable: true, // 数据图形是否可点击
+                symbol: ['circle', 'arrow'], // 标线起始和结束的symbol介绍类型
+                symbolSize: [2, 4], // 标线起始和结束的symbol大小
+                symbolRotate: null, // 标线起始和结束的symbol旋转控制
+                large: false, // 是否启用大规模标线模式，默认关闭
+                smooth: false, // 平滑曲线显示，smooth为true时lineStyle不支持虚线
+                smoothness: 0.2, // 平滑曲线弧度，smooth为true时有效，指定平滑曲线弧度
+                precision: 2, // 小数精度，使用开箱即用的均线markLine时有效
+                bundling: markLineBundling, // 边捆绑（对象）
+                effect: markLineEffect, // 标线图形炫光特效（对象）
+                itemStyle: itemStyle, // 标线图形样式属性
+                data: markLineData, // 标线图形数据
+                //geoCoord  当为第四种时有可能用
+            };
+			//}}}
+
+			//tooltip{{{
+			var axisPointer = { //坐标轴提示器->tooltip
+                type: 'line',
+                lineStyle: {
+                    color: '#48b',
+                    width: 2,
+                    type: 'solid',
+                },
+                crossStyle: {
+                    color: '#1e90ff',
+                    width: 1,
+                    type: 'dashed',
+                },
+                shadowStyle: {
+                    color: 'rgba(150,150,150,0.3)',
+                    width: 'auto',
+                    type: 'default',
+                },
+            };
+
+            var tooltip = { //提示框
+                show: true, // 是否显示
+                zlevel: 1, // 一级层叠控制
+                z: 8, // 二级层叠控制
+                showContent: true, // tooltip主体显示策略
+                trigger: 'item', // 触发类型
+                position: null, // 位置指定，按默认的来吧
+                formatter: null, // 内容格式器
+                islandFormatter: '{a}<br/>{b}:{c}', // 拖拽重计算独有，数据孤岛内容格式器
+                showDelay: 20, // 显示延迟
+                hideDelay: 100, // 隐藏延迟
+                transitoinDuration: 0.4, // 动画变换时长
+                enterable: false, // 鼠标是否可进入气泡中
+                backgroundColor: 'rgba(0, 0, 0, 0.7)', // 提示背景颜色
+                borderColor: '#333', // 提示边框颜色
+                borderRadius: 4, // 提示边框圆角,单位px
+                borderWidth: 0, // 提示边框线宽，单位px
+                padding: 5, // 提示内边距
+                textStyle: textStyle, // 文本样式
+                axisPointer: axisPointer,//坐标轴提示器
+            };
+			//}}}
+
+			//axis一些对象{{{
+			var axisLine = { //坐标轴线->axis
+                show: true, //是否显示
+                onZero: true, //定位到垂直方向的0值坐标上
+                lineStyle: lineStyle, //属性lineStyle控制线条样式
+            };
+
+			var axisTick = { //坐标轴小标记->axis
+                show: false, //是否显示，默认为false，设为true后下面为默认样式
+                interval: 'auto', // 小标记显示挑选间隔，默认为'auto'，可选为： 'auto'（随axisLabel，自动隐藏显示不下的） | 0（全部显示） | {number}（用户指定选择间隔） {function}函数回调，传递参数[index，data[index]]，返回true显示，返回false隐藏
+                onGap: null, //小标记是否显示为间隔，默认等于boundaryGap
+                inside: false, //小标记是否显示为在grid内部，默认在外部
+                length: 5, //属性length控制线长
+                lineStyle: lineStyle,
+            };
+
+			var axisLabel = { //坐标轴文本标签->axis
+                show: true, //是否显示 
+                interval: 'auto', // 标签显示挑选间隔，默认为'auto'，可选为： 'auto'（自动隐藏显示不下的） | 0（全部显示） | {number}（用户指定选择间隔） {function}函数回调，传递参数[index，data[index]]，返回true显示，返回false隐藏
+                rotate: 0, //标签旋转角度，默认为0，不旋转，正值为逆时针，负值为顺时针，可选为：-90 ~ 90
+                margin: 8, //坐标轴文本标签与坐标轴的间距，默认为8，单位px
+                clickable: false, //坐标轴文本标签是否可点击
+                formatter: null, //间隔名称格式器
+                textStyle: textStyle,
+            };
+
+			var splitLine = { //分隔线->axis
+                show: true, //是否显示，默认为true，设为false后下面都没意义了
+                onGap: null, //分隔线是否显示为间隔，默认等于boundaryGap
+                lineStyle: lineStyle,
+            };
+
+			var splitArea = { //分隔区域->axis
+                show: false, //是否显示，默认为false，设为true后带如下默认样式
+                onGap: null, //分隔区域是否显示为间隔，默认等于boundaryGap
+                areaStyle: areaStyle,
+            };
+
+            var xAxisData = [//类目列表，同时也是label内容
+                'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday',
+            ];
+
+			var yAxisData = [//类目列表，同时也是label内容
+			];
+
+            var xAxis = [ //直角坐标系中横轴数组
+                {
+                    show: true, //是否显示
+                    zlevel: 0, //一级层叠控制
+                    z: 0, //二级层叠控制
+                    nameTextStyle: {}, //坐标轴名称文本样式，默认取全局配置
+                    //min: null,//指定的最小值
+                    //max: null, //指定的最大值
+                    scale: false, //脱离0值比例，放大聚焦到_min,_max之间
+                    splitNumber: null, //分割段数，，不指定时根据min、max算法调整
+                    logLabelBase: null, //axis.type === 'log'时生效。指定时，axisLabel显示为指数形式，如指定为4时，axisLabel可显示为4²、4³。不指定时，显示为普通形式，如 1,000,000
+                    logPositive: null, //axis.type === 'log'时生效。指明是否使用反向log数轴（从而支持value为负值）。默认自适应，即如果value全为负值，则logPositive自动设为false，否则为true。
+                    boundaryGap: false, //类目起始和结束两端空白策略，见下图，默认为true留空，false则顶头	
+                    boundaryGap: [0, 0], //坐标轴两端空白策略，数组内数值代表百分比，[原始数据最小值与最终最小值之间的差额，原始数据最大值与最终最大值之间的差额]
+                    type: 'category', //坐标轴类型共三种
+                    postion: 'bottom', //坐标轴位置
+                    name: 'hello', //坐标轴名称
+                    nameLocation: 'end', //坐标轴名称位置
+                    data: xAxisData, //类目列表
+                    axisLine: axisLine, //是否显示轴线（对象）
+                    axisTick: axisTick, //是否显示坐标轴小标记（对象）
+                    axisLabel: axisLabel, //坐标轴文本标签（对象）
+                    splitLine: splitLine, //分隔线（对象）
+                    splitArea: splitArea, //分隔区域（对象）
+                },
+            ];
+
+            var yAxis = [ //直角坐标系中纵轴数组
+                {
+                    show: true, //是否显示
+                    zlevel: 0, //一级层叠控制
+                    z: 0, //二级层叠控制
+                    nameTextStyle: {}, //坐标轴名称文本样式，默认取全局配置
+                    //min: null,//指定的最小值
+                    //max: null, //指定的最大值
+                    scale: false, //脱离0值比例，放大聚焦到_min,_max之间
+                    splitNumber: null, //分割段数，，不指定时根据min、max算法调整
+                    logLabelBase: null, //axis.type === 'log'时生效。指定时，axisLabel显示为指数形式，如指定为4时，axisLabel可显示为4²、4³。不指定时，显示为普通形式，如 1,000,000
+                    logPositive: null, //axis.type === 'log'时生效。指明是否使用反向log数轴（从而支持value为负值）。默认自适应，即如果value全为负值，则logPositive自动设为false，否则为true。
+                    axisLine: axisLine, //是否显示轴线（对象）
+                    axisTick: axisTick, //是否显示坐标轴小标记（对象）
+                    axisLabel: axisLabel, //坐标轴文本标签（对象）
+                    splitLine: splitLine, //分隔线（对象）
+                    splitArea: splitArea, //分隔区域（对象）
+                    boundaryGap: true, //类目起始和结束两端空白策略
+                    boundaryGap: [0, 0], //坐标轴两端空白策略，数组内数值代表百分比，[原始数据最小值与最终最小值之间的差额，原始数据最大值与最终最大值之间的差额]
+                    type: 'value', //坐标轴类型共三种
+                    postion: 'left', //坐标轴位置
+                    name: 'hello', //坐标轴名称
+                    nameLocation: 'end', //坐标轴名称位置
+                    data: yAxisData, //类目列表
+                }
+            ];
+			//}}}
+
+			//一些共有的选项{{{
+            var publicOption = {
+                backgroundColor: '#BDB76A',
+                color: [
+                    'rgba(255, 255, 255, 0.8)',
+                    '#ff7f50', '#87cefa'
+                ],
+                renderAsImage: false, //是否渲染为图片
+
+                calculable: false, // 是否启用拖拽重计算特性 可放在series中用于单个系列
+                calculableColor: 'rgba(255, 203, 212, 0.8)', // 拖拽重计算提示边框颜色
+                calculableHoldreColor: '#CDA1A2', // 可计算占位提示颜色
+                nameConnector: '&', // 数据合并名字间连接符
+                valueConnector: '-', // 数据合并名字与数值间连接符
+
+                animation: true, // 是否启用图表初始化动画
+                addDataAnimation: true, // 是否启用动态数据接口动画效果
+                animationThreshold: 2500, // 动画元素阀值
+                animationDuration: 2000, // 进入动画时长，单位ms
+                animationDurationUpdate: 500, // 更新动画时长，单位ms
+                animationEasing: 'Linear', // 主元素的缓动效果
+
+                tooltip: tooltip, //提示框（对象）
+                xAxis: xAxis, //直角坐标系中横轴数组（对象）
+                yAxis: yAxis, //直角坐标系中纵轴数组（对象）
+            };
+			//}}}
+
+			//series{{{
+            var individuationData = { //个性化数据
+                value: 56,
+                tooltip: tooltip,
+                itemStyle: itemStyle,
+            };
+
+            var dataOne = [ //折线图以及柱状图时
+                12, 34, 56,
+                '-', //当类目对应数据不存在时（不存在不代表为0）为'-'
+                individuationData, //当需要对个别内容进行个性化定义时
+                10, 23,
+            ];
+
+            var dataTwo = [ //scatter（散点图或气泡图）时，
+                [12, 15, 1], ////[xValue, yValue, rValue]，数组内依次为横值，纵值，大小(可选)
+            ];
+
+            var dataThree = [ //K线图 不用
+                [2190.1, 2148.35, 2126.22, 2190.1], // // 开盘，收盘，最低，最高
+            ];
+
+            var dataFour = [ //饼图
+                {
+                    value: 12,
+                    name: 'apple', // 每部分数据的名称
+                    selected: true, // 是否选中
+                },
+            ];
+
+            var dataFive = [ //地图时要说明每部分数据对应的省份，可设置选中状态
+                {
+                    name: '北京',
+                    value: 1234,
+                    selected: true,
+                }, {
+                    name: '天津',
+                    value: 321,
+                },
+            ];
+
+            var data = dataOne; //系列中的数据内容数组 五种类型
+
+            var publicSeriesOption = {
+                zlevel: 0, // 一级层叠控制
+                z: 2, // 二级层叠控制
+                type: 'line', // 图表类型
+                name: null, // 系列名称，该值将与legend索引相关
+                clickable: false, // 数据图形是否可点击，默认开启，如没有click事件响应可关闭
+            };
+
+            var rectangularSeries = {
+                stack: null, // 组合名称，双数值轴时无效，多组数据的堆积图时使用，eg：stack:'group1'，则series数组中stack值等于'group1'的数据做堆积计算
+                xAxisIndex: 0, //xAxis坐标轴数组的索引
+                yAxisIndex: 0, //yAxis坐标轴数组的索引
+
+                barGap: '30%', // 柱间距离
+                barCategoryGap: '20%', // 类目间柱形距离
+                barBinHeight: 0, // 柱条最小高度
+                //barWidth 柱条宽度，不设时自适应
+                //barMaxWidth 柱条最大宽度，不设时自适应
+
+                symbol: 'droplet', // 标志图形类型
+                symbolSize: 2, // 标志图形大小
+                showAllSymbol: false, // 标志图形只有主轴显示
+                //symbolRotate 标志图形旋转角度
+
+                smooth: false, // 平滑曲线显示，为true时lineStyle不支持曲线
+                dataFilter: 'nearst', // 优化方法 EChart会在折线图的数据量大于实际显示像素时启动优化
+                large: false, // 启动大规模散点图
+                largeThreshold: 2000, // 大规模散点图自动切换阀值，large为true有效
+                legendHoveLink: true, // 是否启用（legend)hover时的联动响应
+            };
+
+			var seriesOption = $.extend(publicSeriesOption, rectangularSeries);
+
+            var data1 = $.extend(seriesOption, {
+                itemStyle: itemStyle, // 图形样式（对象）
+                markPoint: markPoint, // 标注（对象）
+                markLine: markLine, // 标线（对象）
+                tooltip: tooltip, // 提示框样式，仅对本系列有效，如不用则用option.tooltip
+                data: data, // 数据（对象）
+            });
+
+            var series = [data1, ];
+			//}}}
+
+            var option = $.extend(publicOption, {
+                series: series, // 驱动图表生成的数据内容数组（对象）
+            });
 
             timeoutHandle = setTimeout(function() {
-				myChart.hideLoading(); 
-				myChart.setOption(option);
-            }, 3000);
+                myChart.hideLoading();
+                myChart.setOption(option);
+            }, 100);
         });
-
     </script>
 </head>
 
