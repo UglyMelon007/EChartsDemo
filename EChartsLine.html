@@ -314,6 +314,24 @@
             };
 			//}}}
 
+			//timeline{{{
+			var timeline = {
+				show: true, //显示策略，可选为：true（显示） | false（隐藏）
+				zlevel: 0, //一级层叠控制
+				z: 4, //二级层叠控制
+				type: 'time',//模式是时间类型，时间轴间隔根据时间跨度自动计算，可选为：'number'
+				notMerge: false,//时间轴上多个option切换时是否进行merge操作，同setOption第二个参数（详见实例方法）
+				realtime: true,//拖拽或点击改变时间轴是否实时显示，在不支持Canvas的浏览器中该值自动强制置为false
+				x: 80,//时间轴左上角横坐标，数值单位px，支持百分比（字符串），如'50%'(显示区域横向中心)
+				y: null, //时间轴左上角纵坐标，数值单位px，支持百分比（字符串），默认无，随y2定位，如'50%'(显示区域纵向中心)
+				x2: 80,//时间轴右下角横坐标，数值单位px，支持百分比（字符串），如'50%'(显示区域横向中心)
+				y2: 0,//时间轴右下角纵坐标，数值单位px，支持百分比（字符串），如'50%'(显示区域纵向中心)
+				//width:  时间轴宽度，默认为总宽度 - x - x2，数值单位px，指定width后将忽略x2。见下图。 支持百分比（字符串），如'50%'(显示区域一半的宽度)
+				height: 50, //时间轴高度，数值单位px，支持百分比（字符串），如'50%'(显示区域一半的高度)
+
+			};
+			//}}}
+
 			//tooltip{{{
 			var axisPointer = { //坐标轴提示器->tooltip
                 type: 'line',
@@ -457,34 +475,6 @@
             ];
 			//}}}
 
-			//一些共有的选项{{{
-            var publicOption = {
-                backgroundColor: '#BDB76A',
-                color: [
-                    'rgba(255, 255, 255, 0.8)',
-                    '#ff7f50', '#87cefa'
-                ],
-                renderAsImage: false, //是否渲染为图片
-
-                calculable: false, // 是否启用拖拽重计算特性 可放在series中用于单个系列
-                calculableColor: 'rgba(255, 203, 212, 0.8)', // 拖拽重计算提示边框颜色
-                calculableHoldreColor: '#CDA1A2', // 可计算占位提示颜色
-                nameConnector: '&', // 数据合并名字间连接符
-                valueConnector: '-', // 数据合并名字与数值间连接符
-
-                animation: true, // 是否启用图表初始化动画
-                addDataAnimation: true, // 是否启用动态数据接口动画效果
-                animationThreshold: 2500, // 动画元素阀值
-                animationDuration: 2000, // 进入动画时长，单位ms
-                animationDurationUpdate: 500, // 更新动画时长，单位ms
-                animationEasing: 'Linear', // 主元素的缓动效果
-
-                tooltip: tooltip, //提示框（对象）
-                xAxis: xAxis, //直角坐标系中横轴数组（对象）
-                yAxis: yAxis, //直角坐标系中纵轴数组（对象）
-            };
-			//}}}
-
 			//series{{{
             var individuationData = { //个性化数据
                 value: 56,
@@ -572,9 +562,47 @@
             var series = [data1, ];
 			//}}}
 
-            var option = $.extend(publicOption, {
+			//一些共有的选项{{{
+            var option = {
+				//公共选项一
+                backgroundColor: '#BDB76A',
+				//公共选项二
+                color: [
+                    'rgba(255, 255, 255, 0.8)',
+                    '#ff7f50', '#87cefa',
+                ],
+				//公共选项三
+                renderAsImage: false, //是否渲染为图片
+				//公共选项四
+                calculable: false, // 是否启用拖拽重计算特性 可放在series中用于单个系列
+                calculableColor: 'rgba(255, 203, 212, 0.8)', // 拖拽重计算提示边框颜色
+                calculableHoldreColor: '#CDA1A2', // 可计算占位提示颜色
+                nameConnector: '&', // 数据合并名字间连接符
+                valueConnector: '-', // 数据合并名字与数值间连接符
+				//公共选项五
+                animation: true, // 是否启用图表初始化动画
+                addDataAnimation: true, // 是否启用动态数据接口动画效果
+                animationThreshold: 2500, // 动画元素阀值
+                animationDuration: 2000, // 进入动画时长，单位ms
+                animationDurationUpdate: 500, // 更新动画时长，单位ms
+                animationEasing: 'Linear', // 主元素的缓动效果
+				//组件选项11个
+				timeline: timeline, //时间轴（详见timeline），每个图表最多仅有一个时间轴控件（对象）
+				title: title, //标题（详见title），每个图表最多仅有一个标题控件（对象）
+				toolbox: toolbox, //工具箱（详见toolbox），每个图表最多仅有一个工具箱（对象）
+                tooltip: tooltip, //提示框（详见tooltip），鼠标悬浮交互时的信息提示（对象）
+				legend: legend,//图例（详见legend），每个图表最多仅有一个图例，混搭图表共享（对象）
+				dataRange:  dataRange,//值域选择（详见dataRange）,值域范围（对象）
+				dataZoom: dataZoom, //数据区域缩放（详见dataZoom）,数据展现范围选择（对象）
+				roamController: roamController,//漫游缩放组件（详见roamController）,搭配地图使用（对象）
+				grid: grid,//直角坐标系内绘图网格（详见grid）（对象）
+                xAxis: xAxis, //直角坐标系中横轴数组（对象）
+                yAxis: yAxis, //直角坐标系中纵轴数组（对象）
+				//数据选项一个
                 series: series, // 驱动图表生成的数据内容数组（对象）
-            });
+            };
+			//}}}
+
 
             timeoutHandle = setTimeout(function() {
                 myChart.hideLoading();
