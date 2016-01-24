@@ -315,6 +315,32 @@
 			//}}}
 
 			//timeline{{{
+
+			var checkpointStyle = {
+				symbol : 'auto',
+				symbolSize : 'auto',
+				color : 'auto',
+				borderColor : 'auto',
+				borderWidth : 'auto',
+				label: label,
+			};
+
+			var controlStyle = {
+				itemSize: 15,
+				itemGap: 5,
+				normal : {
+					color : '#333'
+					},
+				emphasis : {
+					color : '#1e90ff'
+				}
+			};
+
+			var timeLineData = [
+            '2002-01-01','2003-01-01','2004-01-01','2005-01-01','2006-01-01',
+            '2007-01-01','2008-01-01','2009-01-01','2010-01-01','2011-01-01'
+			];
+
 			var timeline = {
 				show: true, //显示策略，可选为：true（显示） | false（隐藏）
 				zlevel: 0, //一级层叠控制
@@ -326,9 +352,136 @@
 				y: null, //时间轴左上角纵坐标，数值单位px，支持百分比（字符串），默认无，随y2定位，如'50%'(显示区域纵向中心)
 				x2: 80,//时间轴右下角横坐标，数值单位px，支持百分比（字符串），如'50%'(显示区域横向中心)
 				y2: 0,//时间轴右下角纵坐标，数值单位px，支持百分比（字符串），如'50%'(显示区域纵向中心)
-				//width:  时间轴宽度，默认为总宽度 - x - x2，数值单位px，指定width后将忽略x2。见下图。 支持百分比（字符串），如'50%'(显示区域一半的宽度)
+				//width: 自适应 时间轴宽度，默认为总宽度 - x - x2，数值单位px，指定width后将忽略x2。见下图。 支持百分比（字符串），如'50%'(显示区域一半的宽度)
 				height: 50, //时间轴高度，数值单位px，支持百分比（字符串），如'50%'(显示区域一半的高度)
+				backgroundColor: 'rgba(0, 0, 0, 0)', //背景颜色，默认透明。
+				borderWidth: 0, //边框线宽
+				boderColor: '#ccc',//边框颜色。
+				padding: 5,//内边距，单位px，默认各方向内边距为5，接受数组分别设定上右下左边距，同css，见下图
+				controlPosition: 'left',//内边距，单位px，默认各方向内边距为5，接受数组分别设定上右下左边距，同css，见下图
+				autoPlay: false,//是否自动播放
+				loop: true,//是否循环播放
+				playInterval: 2000,//播放时间间隔，单位ms
+				symbol: 'emptyDIamond',//轴点symbol
+				siybolSize: 4,//轴点symbol
+				currentIndex: 0,//当前索引位置，对应options数组，用于指定显示特定系列
+				lineStyle: lineStyle,//时间轴轴线样式(对象)
+				label: label,//时间轴标签文本(对象)
+				checkpointStyle: checkpointStyle,// 时间轴当前点 symbol : 当前点symbol，默认随轴上的symbol symbolSize : 当前点symbol大小，默认随轴上symbol大小 color : 当前点symbol颜色，默认为随当前点颜色，可指定具体颜色，如无则为'#1e90ff' borderColor ： 当前点symbol边线颜色 borderWidth ： 当前点symbol边线宽度 label同上(对象)
+				controlStyle: controlStyle,//时间轴控制器样式，可指定itemSize按钮大小，itemGap按钮间隔，normal.color正常和emphasis.color高亮颜色(对象)
+				data: timeLineData,//时间轴列表，同时也是轴label内容(对象)
+			};
+			//}}}
 
+			//title{{{
+			var title = {//title标题，每个图表最多仅有一个标题控件，每个标题控件可设主副标题。
+				show: true,//是否显示
+				zlevel: 0, //一级层叠控制
+				z: 6,//二级层叠控制
+				text: '',//主标题文本，'\n'指定换行
+				link: '',//主标题文本超链接
+				target: null, //指定窗口打开主标题超链接，支持'self' | 'blank'，不指定等同为'blank'（新窗口）
+				subtext: '',//副标题文本，'\n'指定换行
+				sbulink: '',//副标题文本超链接
+				subtarget: null,//指定窗口打开副标题超链接，支持'self' | 'blank'，不指定等同为'blank'（新窗口）
+				x: 'left',//水平安放位置，默认为左侧，可选为：'center' | 'left' | 'right' | {number}（x坐标，单位px）
+				y: 'top',//垂直安放位置，默认为全图顶端，可选为：'top' | 'bottom' | 'center' | {number}（y坐标，单位px）
+				textAlign: null,//水平对齐方式，默认根据x设置自动调整，可选为： left' | 'right' | 'center
+				backgroundColor: 'rgba(0, 0, 0, 0)',//标题背景颜色，默认透明
+				borderColor: '#ccc',//标题边框颜色
+				borderWidth: 0,//标题边框线宽，单位px，默认为0（无边框）
+				padding: 5,//标题内边距，单位px，默认各方向内边距为5，接受数组分别设定上右下左边距，
+				itemGap: 5,//主副标题纵向间隔，单位px，默认为10
+				textStyle: textStyle,//主标题文本样式
+				subtextStyle: textStyle,//副标题文本样式
+			};
+			//}}}
+
+			//toolbox{{{
+
+			var mark = {//->feature->toolbox辅助线标志
+				show : false,//是否显示
+				title : {
+					mark : '辅助线开关',
+					markUndo : '删除辅助线',
+					markClear : '清空辅助线',
+				},
+				lineStyle : lineStyle,
+			};
+
+			var dataZoom = {//->feature->toolbox框选区域缩放
+				show : false,//是否显示
+				title : {
+					dataZoom : '区域缩放',
+					dataZoomReset : '区域缩放后退',
+				},
+			};
+
+			var dataView = {//->feature->toolbox数据视图
+				show : false,//是否显示
+				title : '数据视图',
+				readOnly: false,//数据视图readOnly为false时，会出现刷新按钮，如果是自主编排的显示内容，如何翻转也请自理
+				lang: ['数据视图', '关闭', '刷新'],
+			};
+
+			var magicType = {//->feature->toolbox动态类型切换
+				show : false,//是否显示
+				title : {
+					line : '折线图切换',
+					bar : '柱形图切换',
+					stack : '堆积',
+					tiled : '平铺',
+					force: '力导向布局图切换',
+					chord: '和弦图切换',
+					pie: '饼图切换',
+					funnel: '漏斗图切换'
+				},
+				option: {// 可选，可传入切换是动态修改的配置，将复写series内的数组项
+				},
+				type : ['line', 'bar', 'stack', 'tiled', 'force', 'chord', 'pie', 'funnel',]
+			};
+
+			var restore = {//->feature->toolbox还原，复位原始图表
+				show : false,//是否显示
+				title : '还原',
+			};
+
+			var saveAsImage = {//->feature->toolbox保存图片（IE8-不支持
+				show : false,//是否显示
+				name: 'UglyMelon007',//name 指定图片名称，如不指定，则用图表title标题，如无title标题则图片名称默认为“ECharts”
+				title : '保存为图片',//
+				type : 'png',//type 默认保存图片类型为'png'，需改为'jpeg'
+				lang : ['点击保存'],//lang 非IE浏览器支持点击下载，有保存话术，默认是“点击保存”，可修改
+			};
+
+			var feature = {//启用功能，目前支持feature见下，工具箱自定义功能回调处理->toolbox
+				mark: mark,//辅助线标志，
+				dataZoom: dataZoom,//框选区域缩放
+				dataView: dataView,//数据视图
+				magicType: magicType,//动态类型切换
+				restore: restore,//还原，复位原始图表
+				saveAsImage: saveAsImage,//保存图片（IE8-不支持）
+			};
+
+			var toolbox = {//工具箱，每个图表最多仅有一个工具箱
+				show: false,//是否显示
+				zlevel: 0,//一级层叠控制
+				z: 6,//二级层叠控制
+				orient: 'horizontal',//布局方式，默认为水平布局，可选为：'horizontal' | 'vertical'
+				x: 'right',//水平安放位置，默认为全图居中，可选为：'center' | 'left' | 'right' | {number}（x坐标，单位px）
+				y: 'top',//垂直安放位置，默认为全图顶端，可选为：'top' | 'bottom' | 'center' | {number}（y坐标，单位px）
+				backgrounColor: 'rgba(0, 0, 0, 0)',//工具箱背景颜色，默认透明
+				borderColor: '#ccc',//工具箱边框颜色
+				borderWidth: 0,//工具箱边框线宽，单位px，默认为0（无边框）
+				padding: 5,//工具箱内边距，单位px，默认各方向内边距为5，接受数组分别设定上右下左边距，同css，见下图
+				itemGap: 10,//各个item之间的间隔，单位px，默认为10，横向布局时为水平间隔，纵向布局时为纵向间隔，见下图
+				itemSize: 16,//工具箱icon大小，单位（px）
+				color: ['#1e90ff','#22bb22','#4b0082','#d2691e'],//工具箱icon颜色序列，循环使用，同时支持在具体feature内指定color
+				disableColor: '#ddd',//禁用颜色定义
+				effectiveColor: 'red',//生效颜色定义
+				showTitle: true,//是否显示工具箱文字提示，默认启用
+				textStyle: textStyle,//工具箱提示文字样式，（对象)
+				feature: feature,//启用功能，目前支持feature见下，工具箱自定义功能回调处理，（对象)
 			};
 			//}}}
 
@@ -373,6 +526,98 @@
                 textStyle: textStyle, // 文本样式
                 axisPointer: axisPointer,//坐标轴提示器
             };
+			//}}}
+
+			//legend{{{
+			var legend = {//图例
+				show: true,//是否显示 
+				zlevel: 0,//一级层叠控制
+				z: 4,//二级层叠控制
+				orient: 'horizontal',//布局方式，默认为水平布局
+				x: 'center',//水平安放位置，默认为全图居中
+				y: 'top',//垂直安放位置，默认为全图顶端
+				backgroundColor: 'rgba(0, 0, 0, 0)',//图例背景颜色，默认透明
+				borderColor: '#ccc',//图例边框颜色
+				borderWidth: 0,//图例边框线宽，单位px，默认为0（无边框）
+				padding: 5, //图例内边距，单位px，默认各方向内边距为5，接受数组分别设定上右下左边距
+				itemGap: 10,//各个item之间的间隔，单位px，默认为10，横向布局时为水平间隔，纵向布局时为纵向间隔
+				itemWidth: 20,//图例图形宽度
+				itemHeight: 14,//图例图形高度
+				textStyle: textStyle,//默认只设定了图例文字颜色
+				formatter: null,//文本格式器
+				selectedMode: true,//选择模式，默认开启图例开关，可选single，multiple
+				selected: null,//配置默认选中状态，可配合LEGEND.SELECTED事件做动态数据载入
+				data: [],// 图例内容数组，数组项通常为{string}，每一项代表一个系列的name，默认布局到达边缘会自动分行（列），传入空字符串''可实现手动分行（列）。 使用根据该值索引series中同名系列所用的图表类型和itemStyle，如果索引不到，该item将默认为没启用状态。 如需个性化图例文字样式，可把数组项改为{Object}，指定文本样式和个性化图例icon，格式为 { name : {string}, textStyle : {Object}, icon : {string} }
+			};
+			//}}}
+
+			//dataRange{{{
+			var dataRange = {//值域选择
+				show: true,
+				zlevel: 0,
+				z: 4,
+				orient: 'vertical',
+				x: 'left',
+				y: 'bottom',
+				backgroundColor: 'rgba(0, 0, 0, 0)',
+				borderColor: '#ccc',
+				borderWidth: 0,
+				padding: 5,
+				itemGap: 10,
+				itemWidth:20,
+				itemHeight: 14,
+				//min
+				//max
+				precision: 0,
+				splitNumber: 5,
+				splitList: null,
+				range: null,
+				selectedMode: true,
+				calculable: false,
+				hoverLink: true,
+				reatime: true,
+				realtime: true,
+				color: ['#1e90ff','#f0ffff',],
+				formatter: null,
+				text: null,
+				textStyle: textStyle,
+			};
+			//}}}
+
+			//roamController{{{
+			var roamController = {//缩放漫游组件
+				show: true,
+				zlevel: 0,
+				z: 4,
+				x: 'left',
+				y: 'top',
+				width: 80,
+				height: 120,
+				backgroundColor: 'rgba(0, 0, 0, 0)',
+				borderColor: '#ccc',
+				borderWidth: 0,
+				padding: 5,
+				fillerColor: '#fff',
+				handleColor: '#6495ed',
+				step: 15,
+				mapTypeContorl: null,
+			};
+			//}}}
+
+			//grid{{{
+			var grid = {//gird直角坐标系内绘图网格
+				zlevel: 0,
+				z: 0,
+				x: 80,
+				y: 60,
+				x2: 80,
+				y2: 60,
+				//width: 
+				//height
+				backgroundColor: 'rgba(0, 0, 0, 0)',
+				borderWidth: 1,
+				borderColor: '#ccc',
+			};
 			//}}}
 
 			//axis一些对象{{{
@@ -602,7 +847,6 @@
                 series: series, // 驱动图表生成的数据内容数组（对象）
             };
 			//}}}
-
 
             timeoutHandle = setTimeout(function() {
                 myChart.hideLoading();
