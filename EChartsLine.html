@@ -409,7 +409,7 @@
 				lineStyle : lineStyle,
 			};
 
-			var dataZoom = {//->feature->toolbox框选区域缩放
+			var dataZoomToolBox = {//->feature->toolbox框选区域缩放
 				show : false,//是否显示
 				title : {
 					dataZoom : '区域缩放',
@@ -456,7 +456,7 @@
 
 			var feature = {//启用功能，目前支持feature见下，工具箱自定义功能回调处理->toolbox
 				mark: mark,//辅助线标志，
-				dataZoom: dataZoom,//框选区域缩放
+				dataZoom: dataZoomToolBox,//框选区域缩放
 				dataView: dataView,//数据视图
 				magicType: magicType,//动态类型切换
 				restore: restore,//还原，复位原始图表
@@ -553,70 +553,95 @@
 
 			//dataRange{{{
 			var dataRange = {//值域选择
-				show: true,
-				zlevel: 0,
-				z: 4,
-				orient: 'vertical',
-				x: 'left',
-				y: 'bottom',
-				backgroundColor: 'rgba(0, 0, 0, 0)',
-				borderColor: '#ccc',
-				borderWidth: 0,
-				padding: 5,
-				itemGap: 10,
-				itemWidth:20,
-				itemHeight: 14,
-				//min
-				//max
-				precision: 0,
-				splitNumber: 5,
-				splitList: null,
-				range: null,
-				selectedMode: true,
-				calculable: false,
-				hoverLink: true,
-				reatime: true,
-				realtime: true,
-				color: ['#1e90ff','#f0ffff',],
-				formatter: null,
-				text: null,
-				textStyle: textStyle,
+				show: true,//是否显示
+				zlevel: 0,//一级层叠控制
+				z: 4,//二级层叠控制
+				orient: 'vertical',//布局方式
+				x: 'left',//水平安放位置
+				y: 'bottom',//垂直安放位置
+				backgroundColor: 'rgba(0, 0, 0, 0)',//值域控件背景颜色，默认透明
+				borderColor: '#ccc',//值域控件边框颜色
+				borderWidth: 0,//值域控件边框线宽，单位px，默认为0
+				padding: 5,//值域控件内边距，单位px，默认各方向内边距为5，接受数组分别设定上右下左边距
+				itemGap: 10,//各个item之间的间隔，单位px，默认为10，横向布局时为水平间隔，纵向布局时为纵向间隔，
+				itemWidth:20,//值域控件图形宽度
+				itemHeight: 14,//值域控件图形高度
+				//min// 指定的最小值，eg: 0，默认无，必须参数，唯有指定了splitList时可缺省min。
+				//max// 指定的最大值，eg: 100，默认无，必须参数，唯有指定了splitList时可缺省max
+				precision: 0,//小数精度，默认为0，无小数点，当 min ~ max 间在当前精度下无法整除splitNumber份时，精度会自动提高以满足均分，不支持不等划分
+				splitNumber: 5,//分割段数，默认为5，为0时为线性渐变，calculable为true是默认均分100份
+				splitList: null,// 自定义分割方式，支持不等距分割。splitList被指定时，splitNumber将被忽略。 splitList是一个（不可为空的）Array，Array的每一项为一个Object，含有如下属性： { start: 10     本项的数据范围起点（>=），如果不设置表示负无穷。 end: 30     本项的数据范围终点（<=），如果不设置表示正无穷。 如果想本项只对应一个值，那么start和end设同样的数就可以了。 label: '10 to 30'     本项的显示标签，缺省则自动生成label color: '#333'     本项的颜色，缺省则自动计算color } 
+				range: null,// 用于设置dataRange的初始选中范围。calculable为true时有效。 其值型如：{start: 10, end: 50}。
+				selectedMode: true,//选择模式，默认开启值域开关，可选single，multiple
+				calculable: false,//是否启用值域漫游，启用后无视splitNumber和splitList，值域显示为线性渐变
+				hoverLink: true,//是否启用地图hover时的联动响应（详情披露）
+				reatime: true,//值域漫游是否实时显示，在不支持Canvas的浏览器中该值自动强制置为false。
+				realtime: true,//值域颜色标识，颜色数组长度必须>=2，颜色代表从数值高到低的变化，即颜色数组低位代表数值高的颜色标识 ，支持Alpha通道上的变化（rgba）
+				color: ['#1e90ff','#f0ffff',],//值域颜色标识，颜色数组长度必须>=2，颜色代表从数值高到低的变化，即颜色数组低位代表数值高的颜色标识 ，支持Alpha通道上的变化（rgba）
+				formatter: null,//内容格式器
+				text: null,//值域文字显示，splitNumber生效时默认以计算所得数值作为值域文字显示，可指定长度为2的文本数组显示简介的值域文本，如['高', '低']，'\n'指定换行
+				textStyle: textStyle,//默认只设定了值域控件文字颜色
+			};
+			//}}}
+
+			//dataZoom{{{
+			var dataZoom = {
+				zlevel: 0,//一级层叠控制
+				z: 4,//二级层叠控制
+				show: false, //是否显示，当show为true时则接管使用指定类目轴的全部系列数据，如不指定则接管全部直角坐标系数据。
+				orient: 'horizontal',//布局方式，默认为水平布局，可选为：'horizontal' | 'vertical'
+				//x//水平安放位置，默认为根据grid参数适配，纵向布局默认左侧，可指定 {number}（左上角x坐标，单位px）
+				//y//垂直安放位置，默认为根据grid参数适配，纵向布局默认下方，可指定 {number}（左上角y坐标，单位px）
+				//width// 指定宽度，横向布局时默认为根据grid参数适配，纵向布局是默认为30，可指定 {number}（宽度，单位px）
+				//height// 指定高度，纵向布局时默认为根据grid参数适配，横向布局是默认为30，可指定 {number}（高度，单位px）
+				backgroundColor: 'rgba(0, 0, 0, 0)',//背景颜色，默认透明
+				dataBackgroudColor: '#eee',//数据缩略背景颜色，仅以第一个系列的数据作为缩量图显示
+				fillerColor: 'rgba(144, 197, 237, 0.2)',//选择区域填充颜色
+				handleColor: 'rgba(70, 130, 180, 0.8)',//控制手柄颜色
+				handleSize: 8,//控制手柄大小
+				xAxisIndex: null,//当不指定时默认控制所有横向类目，可通过数组指定多个需要控制的横向类目坐标轴Index，仅一个时可直接为数字
+				yAxisIndex: null,//当不指定时默认控制所有纵向类目，可通过数组指定多个需要控制的纵向类目坐标轴Index，仅一个时可直接为数字
+				start: 0,//数据缩放，选择起始比例，默认为0（%），从首个数据起选择。
+				end: 100,//数据缩放，选择结束比例，默认为100（%），到最后一个数据选择结束。
+				showDetail: true,//缩放变化是否显示定位详情。
+				realtime: false,//缩放变化是否实时显示，在不支持Canvas的浏览器中该值自动强制置为false
+				zoomLock: false,//数据缩放锁，默认为false，当设置为true时选择区域不能伸缩，即(end - start)值保持不变，仅能做数据漫游。
 			};
 			//}}}
 
 			//roamController{{{
 			var roamController = {//缩放漫游组件
-				show: true,
-				zlevel: 0,
-				z: 4,
-				x: 'left',
-				y: 'top',
-				width: 80,
-				height: 120,
-				backgroundColor: 'rgba(0, 0, 0, 0)',
-				borderColor: '#ccc',
-				borderWidth: 0,
-				padding: 5,
-				fillerColor: '#fff',
-				handleColor: '#6495ed',
-				step: 15,
-				mapTypeContorl: null,
+				show: true,//是否显示 
+				zlevel: 0,//一级层叠控制
+				z: 4,//二级层叠控制
+				x: 'left',//水平安放位置，默认为左侧，可选为：'center' | 'left' | 'right' | {number}（x坐标，单位px）
+				y: 'top',//垂直安放位置，默认为全图顶端，可选为：'top' | 'bottom' | 'center' | {number}（y坐标，单位px）
+				width: 80,//指定宽度，决定4向漫游圆盘大小，可指定 {number}（宽度，单位px）
+				height: 120,//指定高度，缩放控制键默认会在指定高度的最下方最大化显示，可指定 {number}（高度，单位px）
+				backgroundColor: 'rgba(0, 0, 0, 0)',//缩放漫游组件背景颜色，默认透明
+				borderColor: '#ccc',//缩放漫游组件边框颜色
+				borderWidth: 0,//缩放漫游组件边框线宽，单位px，默认为0（无边框）
+				padding: 5,//缩放漫游组件内边距，单位px，默认各方向内边距为5，接受数组分别设定上右下左边距
+				fillerColor: '#fff',//漫游组件文字填充颜色
+				handleColor: '#6495ed',//控制手柄主体颜色
+				step: 15,//4向漫游移动步伐，单位px
+				mapTypeContorl: null,// 必须，指定漫游组件可控地图类型，如：{ china: true } 当同一图表内同时呈现多个地图时，可以单独指定所需控制地图类型，如：{ china: false, '北京': true}
 			};
 			//}}}
 
 			//grid{{{
 			var grid = {//gird直角坐标系内绘图网格
-				zlevel: 0,
-				z: 0,
-				x: 80,
-				y: 60,
-				x2: 80,
-				y2: 60,
-				//width: 
-				//height
-				backgroundColor: 'rgba(0, 0, 0, 0)',
-				borderWidth: 1,
-				borderColor: '#ccc',
+				zlevel: 0,//一级层叠控制
+				z: 0,//二级层叠控制
+				x: 80,//直角坐标系内绘图网格左上角横坐标，数值单位px，支持百分比（字符串），如'50%'(显示区域横向中心)
+				y: 60,//直角坐标系内绘图网格左上角纵坐标，数值单位px，支持百分比（字符串），如'50%'(显示区域纵向中心)
+				x2: 80,//直角坐标系内绘图网格右下角横坐标，数值单位px，支持百分比（字符串），如'50%'(显示区域横向中心)
+				y2: 60,//直角坐标系内绘图网格右下角纵坐标，数值单位px，支持百分比（字符串），如'50%'(显示区域纵向中心)
+				//width: / 直角坐标系内绘图网格（不含坐标轴）宽度，默认为总宽度 - x - x2，数值单位px，指定width后将忽略x2，见下图。 支持百分比（字符串），如'50%'(显示区域一半的宽度)
+				//height// 直角坐标系内绘图网格（不含坐标轴）高度，默认为总高度 - y - y2，数值单位px，指定height后将忽略y2，见下图。 支持百分比（字符串），如'50%'(显示区域一半的高度)
+				backgroundColor: 'rgba(0, 0, 0, 0)',//背景颜色，默认透明。
+				borderWidth: 1,//边框线宽
+				borderColor: '#ccc',//边框颜色。
 			};
 			//}}}
 
