@@ -43,18 +43,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CheckpointStyle.cs" />
-    <Compile Include="ControlStyle.cs" />
-    <Compile Include="ControlStyleEmphasis.cs" />
-    <Compile Include="ControlStyleNormal.cs" />
-    <Compile Include="EChartsComponent.cs" />
-    <Compile Include="EChartsComponentTimeLine.cs" />
-    <Compile Include="EChartsStyle.cs" />
-    <Compile Include="Label.cs" />
-    <Compile Include="LineStyle.cs" />
+    <Compile Include="Component\TimeLine\Style\CheckpointStyle.cs" />
+    <Compile Include="Component\TimeLine\Style\ControlStyle.cs" />
+    <Compile Include="Component\TimeLine\Style\ControlStyleEmphasis.cs" />
+    <Compile Include="Component\TimeLine\Style\ControlStyleNormal.cs" />
+    <Compile Include="Component\EChartsComponent.cs" />
+    <Compile Include="Component\TimeLine\EChartsComponentTimeLine.cs" />
+    <Compile Include="Option.cs" />
+    <Compile Include="Series\Series.cs" />
+    <Compile Include="Style\AreaStyle.cs" />
+    <Compile Include="Style\EChartsStyle.cs" />
+    <Compile Include="Style\ItemStyle.cs" />
+    <Compile Include="Style\ItemStyleBase.cs" />
+    <Compile Include="Style\Label.cs" />
+    <Compile Include="Style\LabelLine.cs" />
+    <Compile Include="Style\LineStyle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TextStyle.cs" />
-    <Compile Include="TimeLineLabel.cs" />
+    <Compile Include="Style\TextStyle.cs" />
+    <Compile Include="Component\TimeLine\Style\TimeLineLabel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
