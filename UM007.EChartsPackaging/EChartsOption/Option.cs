@@ -159,7 +159,7 @@ namespace EChartsOption
         #endregion
 
         #region 数据选项
-        private 
+        private Series[] series = 
         #endregion
     }
 }

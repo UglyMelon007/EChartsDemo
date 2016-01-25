@@ -5,3 +5,6 @@ C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\EChartsOpt
 C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\EChartsOption\obj\Debug\EChartsOption.pdb
 C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\EChartsOption\bin\Debug\log4net.dll
 C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\EChartsOption\bin\Debug\log4net.xml
+C:\Users\Administrator\github\EChartsDemo\UM007.EChartsPackaging\EChartsOption\obj\Debug\EChartsOption.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\github\EChartsDemo\UM007.EChartsPackaging\EChartsOption\obj\Debug\EChartsOption.dll
+C:\Users\Administrator\github\EChartsDemo\UM007.EChartsPackaging\EChartsOption\obj\Debug\EChartsOption.pdb

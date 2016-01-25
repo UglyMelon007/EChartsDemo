@@ -51,6 +51,7 @@
     <Compile Include="Component\TimeLine\EChartsComponentTimeLine.cs" />
     <Compile Include="Option.cs" />
     <Compile Include="Series\Series.cs" />
+    <Compile Include="Series\SeriesData.cs" />
     <Compile Include="Style\AreaStyle.cs" />
     <Compile Include="Style\EChartsStyle.cs" />
     <Compile Include="Style\ItemStyle.cs" />

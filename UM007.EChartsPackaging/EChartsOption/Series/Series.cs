@@ -11,5 +11,6 @@
         private string itemStyle = "null";
         private string markPoint = "null";
         private string markLine = "null";
+        private SeriesData[]  
     }
 }
