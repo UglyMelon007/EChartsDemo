@@ -1,0 +1,7 @@
+C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\EChartsOption\bin\Debug\EChartsOption.dll
+C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\EChartsOption\bin\Debug\EChartsOption.pdb
+C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\EChartsOption\obj\Debug\EChartsOption.csprojResolveAssemblyReference.cache
+C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\EChartsOption\obj\Debug\EChartsOption.dll
+C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\EChartsOption\obj\Debug\EChartsOption.pdb
+C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\EChartsOption\bin\Debug\log4net.dll
+C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\EChartsOption\bin\Debug\log4net.xml

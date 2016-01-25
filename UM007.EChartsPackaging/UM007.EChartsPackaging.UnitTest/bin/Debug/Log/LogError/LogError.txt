@@ -1,0 +1,8 @@
+
+异常时间：2016-01-25 14:17:31,746 
+异常线程：10 
+异常级别：ERROR 
+异常类：EChartsOption.EChartsComponent 
+异常信息：Show赋值错误，恢复默认值false 
+打印日志详细位置：
+EChartsOption.EChartsComponent.set_Show(c:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\EChartsOption\EChartsComponent.cs:33)

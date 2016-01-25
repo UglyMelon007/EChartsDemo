@@ -1,0 +1,12 @@
+C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\UM007.EChartsPackaging.UnitTest\bin\Debug\UM007.EChartsPackaging.UnitTest.dll
+C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\UM007.EChartsPackaging.UnitTest\bin\Debug\UM007.EChartsPackaging.UnitTest.pdb
+C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\UM007.EChartsPackaging.UnitTest\bin\Debug\EChartsOption.dll
+C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\UM007.EChartsPackaging.UnitTest\bin\Debug\EChartsOption.pdb
+C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\UM007.EChartsPackaging.UnitTest\obj\Debug\UM007.EChartsPackaging.UnitTest.csprojResolveAssemblyReference.cache
+C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\UM007.EChartsPackaging.UnitTest\obj\Debug\UM007.EChartsPackaging.UnitTest.dll
+C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\UM007.EChartsPackaging.UnitTest\obj\Debug\UM007.EChartsPackaging.UnitTest.pdb
+C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\UM007.EChartsPackaging.UnitTest\bin\Debug\log4net.dll
+C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\UM007.EChartsPackaging.UnitTest\bin\Debug\log4net.xml
+C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\UM007.EChartsPackaging.UnitTest\bin\Debug\UM007.EChartsPackaging.UnitTest.dll.config
+C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\UM007.EChartsPackaging.UnitTest\bin\Debug\Newtonsoft.Json.dll
+C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\UM007.EChartsPackaging.UnitTest\bin\Debug\Newtonsoft.Json.xml
