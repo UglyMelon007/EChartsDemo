@@ -9,6 +9,5 @@ namespace EChartsOption.Series
     class SeriesData
     {
         private string _value = "";
-        private ItemStyle 
     }
 }

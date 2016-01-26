@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using EChartsOption.Component;
-using EChartsOption.Component.TimeLine.Style;
+﻿using EChartsOption.Component.Timeline.Style;
 using EChartsOption.Style;
 
-namespace EChartsOption
+namespace EChartsOption.Component.Timeline
 {
-    public class EChartsComponentTimeLine : EChartsComponent
+    public class EChartsComponentTimeline : EChartsComponent
     {
         private string _type = "time";
         private string _notMerge = "false";
@@ -263,7 +258,7 @@ namespace EChartsOption
             set { _timeLineData = value; }
         }
 
-        public EChartsComponentTimeLine()
+        public EChartsComponentTimeline()
         {
             _lineStyle.Color = "#666";
             _lineStyle.Width = "1";

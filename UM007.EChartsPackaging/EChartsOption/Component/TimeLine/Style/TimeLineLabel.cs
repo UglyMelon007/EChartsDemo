@@ -1,6 +1,6 @@
 ﻿using EChartsOption.Style;
 
-namespace EChartsOption.Component.TimeLine.Style
+namespace EChartsOption.Component.Timeline.Style
 {
     public class TimeLineLabel
     {

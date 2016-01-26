@@ -43,13 +43,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Component\TimeLine\Style\CheckpointStyle.cs" />
-    <Compile Include="Component\TimeLine\Style\ControlStyle.cs" />
-    <Compile Include="Component\TimeLine\Style\ControlStyleEmphasis.cs" />
-    <Compile Include="Component\TimeLine\Style\ControlStyleNormal.cs" />
+    <Compile Include="Component\Axis\Axis.cs" />
+    <Compile Include="Component\Axis\AxisData.cs" />
+    <Compile Include="Component\Axis\AxisLabel.cs" />
+    <Compile Include="Component\Axis\AxisLine.cs" />
+    <Compile Include="Component\Axis\AxisTick.cs" />
+    <Compile Include="Component\Axis\EChartsComponentXAxis.cs" />
+    <Compile Include="Component\Axis\EChartsComponentYAxis.cs" />
+    <Compile Include="Component\Axis\SplitArea.cs" />
+    <Compile Include="Component\Axis\SplitLine.cs" />
+    <Compile Include="Component\DataZoom\EChartsComponentDataZoom.cs" />
+    <Compile Include="Component\Grid\EChartsComponentGrid.cs" />
+    <Compile Include="Component\Legend\EChartsComponentLegend.cs" />
+    <Compile Include="Component\Legend\LegendData.cs" />
+    <Compile Include="Component\Timeline\Style\CheckpointStyle.cs" />
+    <Compile Include="Component\Timeline\Style\ControlStyle.cs" />
+    <Compile Include="Component\Timeline\Style\ControlStyleEmphasis.cs" />
+    <Compile Include="Component\Timeline\Style\ControlStyleNormal.cs" />
     <Compile Include="Component\EChartsComponent.cs" />
-    <Compile Include="Component\TimeLine\EChartsComponentTimeLine.cs" />
+    <Compile Include="Component\Timeline\EChartsComponentTimeLine.cs" />
+    <Compile Include="Component\Title\EChartsComponentTitle.cs" />
+    <Compile Include="Component\Toolbox\DataView.cs" />
+    <Compile Include="Component\Toolbox\DataZoom.cs" />
+    <Compile Include="Component\Toolbox\DataZoomTitle.cs" />
+    <Compile Include="Component\Toolbox\EChartsComponentToolbox.cs" />
+    <Compile Include="Component\Toolbox\Feature.cs" />
+    <Compile Include="Component\Toolbox\MagicType.cs" />
+    <Compile Include="Component\Toolbox\MagicTypeTitle.cs" />
+    <Compile Include="Component\Toolbox\Mark.cs" />
+    <Compile Include="Component\Toolbox\Restore.cs" />
+    <Compile Include="Component\Toolbox\SaveAsImage.cs" />
+    <Compile Include="Component\Toolbox\Title.cs" />
+    <Compile Include="Component\Tooltip\AxisPointer.cs" />
+    <Compile Include="Component\Tooltip\CrossStyle.cs" />
+    <Compile Include="Component\Tooltip\EChartsComponentTooltip.cs" />
+    <Compile Include="Component\Tooltip\ShadowStyle.cs" />
     <Compile Include="Option.cs" />
+    <Compile Include="Series\MarkPoint.cs" />
+    <Compile Include="Series\MarkPointData.cs" />
+    <Compile Include="Series\MarkPointEffect.cs" />
     <Compile Include="Series\Series.cs" />
     <Compile Include="Series\SeriesData.cs" />
     <Compile Include="Style\AreaStyle.cs" />
@@ -61,8 +93,9 @@
     <Compile Include="Style\LineStyle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Style\TextStyle.cs" />
-    <Compile Include="Component\TimeLine\Style\TimeLineLabel.cs" />
+    <Compile Include="Component\Timeline\Style\TimeLineLabel.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

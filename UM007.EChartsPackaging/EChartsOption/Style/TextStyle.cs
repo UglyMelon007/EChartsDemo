@@ -3,7 +3,7 @@
     public class TextStyle : EChartsStyle
     {
         private string _color = "null";
-        private string _decoration = "nono";
+        private string _decoration = "none";
         private string _align = "null";
         private string _baseline = "null";
         private string _fontFamily = "Arial, Verdana, sans-serif";
