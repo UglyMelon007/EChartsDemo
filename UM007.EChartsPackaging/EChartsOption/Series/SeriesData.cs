@@ -6,8 +6,7 @@ using EChartsOption.Style;
 
 namespace EChartsOption.Series
 {
-    class SeriesData
+    public class SeriesData
     {
-        private string _value = "";
     }
 }

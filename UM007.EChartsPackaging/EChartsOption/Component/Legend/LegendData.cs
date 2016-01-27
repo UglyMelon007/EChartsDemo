@@ -8,13 +8,19 @@ namespace EChartsOption.Component.Legend
 {
     public class LegendData
     {
-        private string _name = "";
-        private TextStyle _textStyle = new TextStyle();
-        private string _icon = "";
+        #region 字符串属性
+        private string _name = "null";
+        private string _icon = "null";
+
+        public LegendData()
+        {
+            TextStyle = null;
+        }
 
         /// <summary>
         /// 值
         /// </summary>
+        [System.ComponentModel.DefaultValue("null")]
         public string Name
         {
             get { return _name; }
@@ -22,21 +28,21 @@ namespace EChartsOption.Component.Legend
         }
 
         /// <summary>
-        /// 文本样式
+        /// 图标类型,或路径
         /// </summary>
-        public TextStyle TextStyle
-        {
-            get { return _textStyle; }
-            set { _textStyle = value; }
-        }
-
-        /// <summary>
-        /// 图标类型
-        /// </summary>
+        [System.ComponentModel.DefaultValue("null")]
         public string Icon
         {
             get { return _icon; }
             set { _icon = value; }
-        }
+        } 
+        #endregion
+
+        #region 对象属性
+        /// <summary>
+        /// 文本样式
+        /// </summary>
+        public TextStyle TextStyle { get; set; } 
+        #endregion
     }
 }

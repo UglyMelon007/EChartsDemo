@@ -1,25 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel;
 using EChartsOption.Style;
 
-namespace EChartsOption.Series
+namespace EChartsOption.Series.MarkPoint
 {
     public class MarkPoint
     {
-        private string _clickable = "true";
-        private string _symbol = "pin";
-        private string _symbolSize = "10";
+        #region 字符串属性
+        private string _clickable = "null";
+        private string _symbol = "null";
+        private string _symbolSize = "null";
         private string _symbolRotate = "null";
-        private string _large = "false";
-        private MarkPointEffect _effect = new MarkPointEffect();
-        private ItemStyle _itemStyle = new ItemStyle();
-        private MarkPointData[] _data = new MarkPointData[]();
+        private string _large = "null";
 
         /// <summary>
         /// 数据图形是否可点击，默认开启，如果没有click事件响应可以关闭
         /// </summary>
+        [DefaultValue("null")]
         public string Clickable
         {
             get { return _clickable; }
@@ -29,6 +25,7 @@ namespace EChartsOption.Series
         /// <summary>
         /// 标注类型
         /// </summary>
+        [DefaultValue("null")]
         public string Symbol
         {
             get { return _symbol; }
@@ -38,6 +35,7 @@ namespace EChartsOption.Series
         /// <summary>
         /// 标注大小
         /// </summary>
+        [DefaultValue("null")]
         public string SymbolSize
         {
             get { return _symbolSize; }
@@ -47,6 +45,7 @@ namespace EChartsOption.Series
         /// <summary>
         /// 标注图形旋转角度
         /// </summary>
+        [DefaultValue("null")]
         public string SymbolRotate
         {
             get { return _symbolRotate; }
@@ -56,12 +55,15 @@ namespace EChartsOption.Series
         /// <summary>
         /// 是否启动大规模标注模式
         /// </summary>
+        [DefaultValue("null")]
         public string Large
         {
             get { return _large; }
             set { _large = value; }
-        }
+        } 
+        #endregion
 
+        #region 对象属性
         /// <summary>
         /// 标注图形炫光特效: 
         /// show 是否开启，默认关闭 
@@ -73,28 +75,17 @@ namespace EChartsOption.Series
         /// shadowColor 光影颜色，默认跟随color 
         /// shadowBlur 光影模糊度，默认为0 
         /// </summary>
-        public MarkPointEffect Effect
-        {
-            get { return _effect; }
-            set { _effect = value; }
-        }
+        public MarkPointEffect Effect { get; set; }
 
         /// <summary>
         /// 标注图形样式属性
         /// </summary>
-        public ItemStyle ItemStyle
-        {
-            get { return _itemStyle; }
-            set { _itemStyle = value; }
-        }
+        public ItemStyle ItemStyle { get; set; }
 
         /// <summary>
         /// 标注图形数据
         /// </summary>
-        public MarkPointData[] Data
-        {
-            get { return _data; }
-            set { _data = value; }
-        }
+        public MarkPointData[] Data { get; set; } 
+        #endregion
     }
 }

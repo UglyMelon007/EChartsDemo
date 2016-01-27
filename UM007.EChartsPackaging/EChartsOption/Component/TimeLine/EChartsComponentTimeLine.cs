@@ -5,35 +5,31 @@ namespace EChartsOption.Component.Timeline
 {
     public class EChartsComponentTimeline : EChartsComponent
     {
-        private string _type = "time";
-        private string _notMerge = "false";
-        private string _realtime = "true";
-        private string _x = "80";
+        #region 字符串属性
+        private string _type = "null";
+        private string _notMerge = "null";
+        private string _realtime = "null";
+        private string _x = "null";
         private string _y = "null";
-        private string _x2 = "80";
-        private string _y2 = "0";
+        private string _x2 = "null";
+        private string _y2 = "null";
         private string _width = "null";
         private string _height = "null";
-        private string _borderWidth = "0";
-        private string _borderColor = "#ccc";
-        private string _padding = "5";
-        private string _controlPosition = "left";
-        private string _autoPlay = "true";
-        private string _loop = "true";
-        private string _playInterval = "1000";
-        private string _symbol = "emptyDiamond";
-        private string _symbolSize = "4";
-        private string _currentIndex = "0";
-        private string[] _timeLineData = default(string[]);
-
-        private LineStyle _lineStyle = new LineStyle();
-        private TimeLineLabel _label = new TimeLineLabel();
-        private CheckpointStyle _checkpointStyle = new CheckpointStyle();
-        private ControlStyle _controlStyle = new ControlStyle();
+        private string _borderWidth = "null";
+        private string _borderColor = "null";
+        private string _padding = "null";
+        private string _controlPosition = "null";
+        private string _autoPlay = "null";
+        private string _loop = "null";
+        private string _playInterval = "null";
+        private string _symbol = "null";
+        private string _symbolSize = "null";
+        private string _currentIndex = "null";
 
         /// <summary>
         /// 模式是时间类型，时间轴间隔根据时间跨度自动计算，可选为：'number'
         /// </summary>
+        [System.ComponentModel.DefaultValue("null")]
         public string Type
         {
             get { return _type; }
@@ -43,6 +39,7 @@ namespace EChartsOption.Component.Timeline
         /// <summary>
         ///时间轴上多个option切换时是否进行merge操作
         /// </summary>
+        [System.ComponentModel.DefaultValue("null")]
         public string NotMerge
         {
             get { return _notMerge; }
@@ -52,6 +49,7 @@ namespace EChartsOption.Component.Timeline
         /// <summary>
         /// 拖拽或点击改变时间轴是否实时显示，在不支持Canvas的浏览器中该值自动强制置为false
         /// </summary>
+        [System.ComponentModel.DefaultValue("null")]
         public string Realtime
         {
             get { return _realtime; }
@@ -61,6 +59,7 @@ namespace EChartsOption.Component.Timeline
         /// <summary>
         /// 时间轴左上角横坐标，数值单位px，支持百分比（字符串），如'50%'(显示区域横向中心)
         /// </summary>
+        [System.ComponentModel.DefaultValue("null")]
         public string X
         {
             get { return _x; }
@@ -70,6 +69,7 @@ namespace EChartsOption.Component.Timeline
         /// <summary>
         /// 时间轴左上角纵坐标，数值单位px，支持百分比（字符串），默认无，随y2定位，如'50%'(显示区域纵向中心)
         /// </summary>
+        [System.ComponentModel.DefaultValue("null")]
         public string Y
         {
             get { return _y; }
@@ -79,6 +79,7 @@ namespace EChartsOption.Component.Timeline
         /// <summary>
         /// 时间轴右下角横坐标，数值单位px，支持百分比（字符串），如'50%'(显示区域横向中心)
         /// </summary>
+        [System.ComponentModel.DefaultValue("null")]
         public string X2
         {
             get { return _x2; }
@@ -88,6 +89,7 @@ namespace EChartsOption.Component.Timeline
         /// <summary>
         /// 时间轴右下角纵坐标，数值单位px，支持百分比（字符串），如'50%'(显示区域纵向中心)
         /// </summary>
+        [System.ComponentModel.DefaultValue("null")]
         public string Y2
         {
             get { return _y2; }
@@ -98,6 +100,7 @@ namespace EChartsOption.Component.Timeline
         /// 时间轴宽度，默认为总宽度 - x - x2，数值单位px，指定width后将忽略x2。见下图。 
         /// 支持百分比（字符串），如'50%'(显示区域一半的宽度)
         /// </summary>
+        [System.ComponentModel.DefaultValue("null")]
         public string Width
         {
             get { return _width; }
@@ -107,6 +110,7 @@ namespace EChartsOption.Component.Timeline
         /// <summary>
         /// 时间轴高度，数值单位px，支持百分比（字符串），如'50%'(显示区域一半的高度)
         /// </summary>
+        [System.ComponentModel.DefaultValue("null")]
         public string Height
         {
             get { return _height; }
@@ -116,6 +120,7 @@ namespace EChartsOption.Component.Timeline
         /// <summary>
         /// 边框线宽
         /// </summary>
+        [System.ComponentModel.DefaultValue("null")]
         public string BorderWidth
         {
             get { return _borderWidth; }
@@ -125,6 +130,7 @@ namespace EChartsOption.Component.Timeline
         /// <summary>
         /// 边框颜色。
         /// </summary>
+        [System.ComponentModel.DefaultValue("null")]
         public string BorderColor
         {
             get { return _borderColor; }
@@ -134,6 +140,7 @@ namespace EChartsOption.Component.Timeline
         /// <summary>
         /// 内边距，单位px，默认各方向内边距为5，接受数组分别设定上右下左边距
         /// </summary>
+        [System.ComponentModel.DefaultValue("null")]
         public string Padding
         {
             get { return _padding; }
@@ -143,6 +150,7 @@ namespace EChartsOption.Component.Timeline
         /// <summary>
         /// 播放控制器位置，可选为：'left' | 'right' | 'none'
         /// </summary>
+        [System.ComponentModel.DefaultValue("null")]
         public string ConstrolPosition
         {
             get { return _controlPosition; }
@@ -152,6 +160,7 @@ namespace EChartsOption.Component.Timeline
         /// <summary>
         /// 是否自动播放
         /// </summary>
+        [System.ComponentModel.DefaultValue("null")]
         public string AutoPlay
         {
             get { return _autoPlay; }
@@ -161,6 +170,7 @@ namespace EChartsOption.Component.Timeline
         /// <summary>
         /// 是否循环播放
         /// </summary>
+        [System.ComponentModel.DefaultValue("null")]
         public string Loop
         {
             get { return _loop; }
@@ -170,6 +180,7 @@ namespace EChartsOption.Component.Timeline
         /// <summary>
         /// 播放时间间隔，单位ms
         /// </summary>
+        [System.ComponentModel.DefaultValue("null")]
         public string PlayInterval
         {
             get { return _playInterval; }
@@ -179,6 +190,7 @@ namespace EChartsOption.Component.Timeline
         /// <summary>
         /// 轴点symbol
         /// </summary>
+        [System.ComponentModel.DefaultValue("null")]
         public string Symbol
         {
             get { return _symbol; }
@@ -188,6 +200,7 @@ namespace EChartsOption.Component.Timeline
         /// <summary>
         /// 轴点symbol大小
         /// </summary>
+        [System.ComponentModel.DefaultValue("null")]
         public string SymbolSize
         {
             get { return _symbolSize; }
@@ -197,20 +210,19 @@ namespace EChartsOption.Component.Timeline
         /// <summary>
         /// 当前索引位置，对应options数组，用于指定显示特定系列
         /// </summary>
+        [System.ComponentModel.DefaultValue("null")]
         public string CurrentIndex
         {
             get { return _currentIndex; }
             set { _currentIndex = value; }
-        }
+        } 
+        #endregion
 
+        #region 对象属性
         /// <summary>
         /// 时间轴轴线样式，lineStyle控制线条样式
         /// </summary>
-        public LineStyle LineStyle
-        {
-            get { return _lineStyle; }
-            set { _lineStyle = value; }
-        }
+        public LineStyle LineStyle { get; set; }
 
         /// <summary>
         /// 时间轴标签文本 
@@ -220,11 +232,7 @@ namespace EChartsOption.Component.Timeline
         /// formatter ： 间隔名称格式器：{string}（Template） | {Function} 
         /// textStyle : 文字样式
         /// </summary>
-        public TimeLineLabel Label
-        {
-            get { return _label; }
-            set { _label = value; }
-        }
+        public TimeLineLabel Label { get; set; }
 
         /// <summary>
         /// 时间轴当前点 
@@ -234,35 +242,17 @@ namespace EChartsOption.Component.Timeline
         /// borderColor ： 当前点symbol边线颜色 
         /// borderWidth ： 当前点symbol边线宽度 
         /// </summary>
-        public CheckpointStyle CheckpointStyle
-        {
-            get { return _checkpointStyle; }
-            set { _checkpointStyle = value; }
-        }
+        public CheckpointStyle CheckpointStyle { get; set; }
 
         /// <summary>
         /// 时间轴控制器样式，可指定itemSize按钮大小，itemGap按钮间隔，normal.color正常和emphasis.color高亮颜色
         /// </summary>
-        public ControlStyle ControlStyle
-        {
-            get { return _controlStyle; }
-            set { _controlStyle = value; }
-        }
+        public ControlStyle ControlStyle { get; set; }
 
         /// <summary>
         /// 时间轴列表，同时也是轴label内容
         /// </summary>
-        public string[] Data
-        {
-            get { return _timeLineData; }
-            set { _timeLineData = value; }
-        }
-
-        public EChartsComponentTimeline()
-        {
-            _lineStyle.Color = "#666";
-            _lineStyle.Width = "1";
-            _lineStyle.Type = "dashed";
-        }
+        public string[] Data { get; set; } 
+        #endregion
     }
 }
