@@ -214,7 +214,7 @@ namespace EChartsOption
         #endregion
 
         #region 数据选项
-        public Series.Series[] Series { get; set; }
+        public Series.SeriesType.Series[] Series { get; set; }
         #endregion
 
 

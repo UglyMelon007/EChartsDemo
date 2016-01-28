@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel;
 using EChartsOption.Component.Tooltip;
+using EChartsOption.Series.SeriesDataType;
 using EChartsOption.Style;
 
-namespace EChartsOption.Series
+namespace EChartsOption.Series.SeriesType
 {
     public class Series
     {

@@ -1,4 +1,6 @@
-﻿namespace EChartsOption.Series.MarkLine
+﻿using System.ComponentModel;
+
+namespace EChartsOption.Series.MarkLine
 {
     /// <summary>
     /// 标线的数据内容数组，
@@ -17,25 +19,49 @@
     /// </summary>
     public class MarkLineDataOne : MarkLineData
     {
-        private StartOne _start = new StartOne();
-        private EndOne _end = new EndOne();
+        private string _name = "null";
+        private string _value = "null";
+        private string _x = "null";
+        private string _y = "null";
 
         /// <summary>
-        /// 启始点属性
+        /// 名称
         /// </summary>
-        public StartOne Start
+        [DefaultValue("null")]
+        public string Name
         {
-            get { return _start; }
-            set { _start = value; }
+            get { return _name; }
+            set { _name = value; }
         }
 
         /// <summary>
-        /// 结束点属性
+        /// 值
         /// </summary>
-        public EndOne End
+        [DefaultValue("null")]
+        public string Value
         {
-            get { return _end; }
-            set { _end = value; }
+            get { return _value; }
+            set { _value = value; }
+        }
+
+        /// <summary>
+        /// x坐标
+        /// </summary>
+        [DefaultValue("null")]
+        public string X
+        {
+            get { return _x; }
+            set { _x = value; }
+        }
+
+        /// <summary>
+        /// y坐标
+        /// </summary>
+        [DefaultValue("null")]
+        public string Y
+        {
+            get { return _y; }
+            set { _y = value; }
         }
     }
 }

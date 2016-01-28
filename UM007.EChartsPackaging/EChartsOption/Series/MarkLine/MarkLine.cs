@@ -100,6 +100,7 @@ namespace EChartsOption.Series.MarkLine
         /// </summary>
         public MarkLineData[] Data { get; set; }
 
+        public MarkLineData[,] DataGroup { get; set; }
 
         /// <summary>
         /// 标线起始和结束的symbol介绍类型，如果都一样，可以直接传string

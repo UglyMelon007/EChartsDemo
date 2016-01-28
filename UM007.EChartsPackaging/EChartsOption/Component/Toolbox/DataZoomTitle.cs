@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel;
 
 namespace EChartsOption.Component.Toolbox
 {
     public class DataZoomTitle
     {
-        private string _dataZoom = "区域缩放";
-        private string _dataZoomReset = "区域缩放后退";
+        private string _dataZoom = "null";
+        private string _dataZoomReset = "null";
 
         /// <summary>
         ///区域缩放 
         /// </summary>
+        [DefaultValue("null")]
         public string DataZoom
         {
             get { return _dataZoom; }
@@ -22,6 +20,7 @@ namespace EChartsOption.Component.Toolbox
         /// <summary>
         ///区域缩放后退 
         /// </summary>
+        [DefaultValue("null")]
         public string DataZoomReset
         {
             get { return _dataZoomReset; }

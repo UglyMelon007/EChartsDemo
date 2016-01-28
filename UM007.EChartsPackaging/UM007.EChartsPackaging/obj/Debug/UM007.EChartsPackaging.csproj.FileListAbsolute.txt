@@ -43,3 +43,5 @@ C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\UM007.ECha
 C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\UM007.EChartsPackaging\obj\Debug\UM007.EChartsPackaging.csprojResolveAssemblyReference.cache
 C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\UM007.EChartsPackaging\obj\Debug\UM007.EChartsPackaging.dll
 C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\UM007.EChartsPackaging\obj\Debug\UM007.EChartsPackaging.pdb
+C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\UM007.EChartsPackaging\bin\EChartsOption.dll
+C:\Users\UglyMelon007\Desktop\EChartsPackaging\UM007.EChartsPackaging\UM007.EChartsPackaging\bin\EChartsOption.pdb

@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel;
 using EChartsOption.Style;
 
 namespace EChartsOption.Component.Axis
 {
     public class AxisTick
     {
-        private string _show = "false";
-        private string _interval = "auto";
+        #region 字符串属性
+        private string _show = "null";
+        private string _interval = "null";
         private string _onGap = "null";
-        private string _inside = "false";
-        private string _length = "5";
-        private LineStyle _lineStyle = new LineStyle();
+        private string _inside = "null";
+        private string _length = "null";
 
         /// <summary>
         /// 是否显示，默认为false，设为true后下面为默认样式
         /// </summary>
+        [DefaultValue("null")]
         public string Show
         {
             get { return _show; }
@@ -30,6 +28,7 @@ namespace EChartsOption.Component.Axis
         /// {number}（用户指定选择间隔） 
         /// {function}函数回调，传递参数[index，data[index]]，返回true显示，返回false隐藏
         /// </summary>
+        [DefaultValue("null")]
         public string Interval
         {
             get { return _interval; }
@@ -39,6 +38,7 @@ namespace EChartsOption.Component.Axis
         /// <summary>
         /// 小标记是否显示为间隔，默认等于boundaryGap
         /// </summary>
+        [DefaultValue("null")]
         public string OnGap
         {
             get { return _onGap; }
@@ -48,6 +48,7 @@ namespace EChartsOption.Component.Axis
         /// <summary>
         /// 小标记是否显示为在grid内部，默认在外部
         /// </summary>
+        [DefaultValue("null")]
         public string Inside
         {
             get { return _inside; }
@@ -57,25 +58,19 @@ namespace EChartsOption.Component.Axis
         /// <summary>
         /// 属性length控制线长
         /// </summary>
+        [DefaultValue("null")]
         public string Length
         {
             get { return _length; }
             set { _length = value; }
         }
+        #endregion
 
+        #region 对象属性
         /// <summary>
         /// 属性lineStyle控制线条样式
         /// </summary>
-        public LineStyle LineStyle
-        {
-            get { return _lineStyle; }
-            set { _lineStyle = value; }
-        }
-
-        public AxisTick()
-        {
-            _lineStyle.Color = "#333";
-            _lineStyle.Width = "1";
-        }
+        public LineStyle LineStyle { get; set; }
+        #endregion
     }
 }

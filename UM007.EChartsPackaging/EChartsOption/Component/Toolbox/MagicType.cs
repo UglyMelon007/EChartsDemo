@@ -1,35 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel;
 
 namespace EChartsOption.Component.Toolbox
 {
     public class MagicType
     {
-        private string _show = "true";
-        private string[] _type = {"line", "bar", "stack", "tiled",};
-        private MagicTypeTitle _title = new MagicTypeTitle();
+        #region 字符串属性
+        private string _show = "null";
+        private string _option = "null";
 
-        //可选，可传入切换是动态修改的配置，将复写series内的数组项
-        // private string option = null;
 
+        [DefaultValue("null")]
         public string Show
         {
             get { return _show; }
             set { _show = value; }
         }
 
-        public string[] Type
+        /// <summary>
+        ///可选，可传入切换是动态修改的配置，将复写series内的数组项
+        /// 暂时没开放此功能
+        /// </summary>
+        [DefaultValue("null")]
+        public string Option
         {
-            get { return _type; }
-            set { _type = value; }
+            get { return _option; }
+            set { _option = "null"; }
         }
+        
+        #endregion
 
-        public MagicTypeTitle Title
-        {
-            get { return _title; }
-            set { _title = value; }
-        }
+        #region 对象属性
+        /// <summary>
+        /// type : ['line', 'bar', 'stack', 'tiled']
+        /// </summary>
+        public string[] Type { get; set; }
+
+        public MagicTypeTitle Title { get; set; } 
+        #endregion
     }
 }

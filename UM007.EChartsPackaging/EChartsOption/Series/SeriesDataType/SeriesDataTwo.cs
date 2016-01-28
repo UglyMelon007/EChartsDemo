@@ -1,4 +1,4 @@
-﻿namespace EChartsOption.Series
+﻿namespace EChartsOption.Series.SeriesDataType
 {
     /// <summary>
     /// 当图表类型为scatter（散点图或气泡图）时，其数值设置比较特殊，

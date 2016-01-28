@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel;
 
 namespace EChartsOption.Component.Toolbox
 {
     public class MagicTypeTitle
     {
-        private string _line = "折线图切换";
-        private string _bar = "柱形切换";
-        private string _stack = "堆积";
-        private string _tiled = "平铺";
+        private string _line = "null";
+        private string _bar = "null";
+        private string _stack = "null";
+        private string _tiled = "null";
 
         /// <summary>
         /// line文字描述
         /// </summary>
+        [DefaultValue("null")]
         public string Line
         {
             get { return _line; }
@@ -24,6 +22,7 @@ namespace EChartsOption.Component.Toolbox
         /// <summary>
         /// bar文字描述
         /// </summary>
+        [DefaultValue("null")]
         public string Bar
         {
             get { return _bar; }
@@ -33,6 +32,7 @@ namespace EChartsOption.Component.Toolbox
         /// <summary>
         /// stack文字描述
         /// </summary>
+        [DefaultValue("null")]
         public string Stack
         {
             get { return _stack; }
@@ -42,6 +42,7 @@ namespace EChartsOption.Component.Toolbox
         /// <summary>
         /// tiled文字描述
         /// </summary>
+        [DefaultValue("null")]
         public string Tiled
         {
             get { return _tiled; }

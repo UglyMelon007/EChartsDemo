@@ -1,49 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel;
 using EChartsOption.Style;
 
 namespace EChartsOption.Component.Toolbox
 {
     public class Mark
     {
-        private string _show = "true";
-        private LineStyle _lineStyle = new LineStyle();
-        private Title _title = new Title();
+        #region 字符串属性
+        private string _show = "null";
 
         /// <summary>
         /// 是否显示
         /// </summary>
+        [DefaultValue("null")]
         public string Show
         {
             get { return _show; }
             set { _show = value; }
-        }
+        } 
+        #endregion
 
+        #region 对象属性
         /// <summary>
         /// 线条样式
         /// </summary>
-        public LineStyle LineStyle
-        {
-            get { return _lineStyle; }
-            set { _lineStyle = value; }
-        }
+        public LineStyle LineStyle { get; set; }
 
         /// <summary>
         /// 显示文本
         /// </summary>
-        public Title Title
-        {
-            get { return _title; }
-            set { _title = value; }
-        }
-
-        public Mark()
-        {
-            _lineStyle.Width = "2";
-            _lineStyle.Color = "#1e90ff";
-            _lineStyle.Type = "dashed";
-        }
+        public Title Title { get; set; } 
+        #endregion
     }
 }

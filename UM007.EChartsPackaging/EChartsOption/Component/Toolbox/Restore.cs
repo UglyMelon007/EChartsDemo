@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel;
 
 namespace EChartsOption.Component.Toolbox
 {
     public class Restore
     {
-        private string _show = "true";
-        private string _title = "还原";
+        private string _show = "null";
+        private string _title = "null";
 
         /// <summary>
         /// 是否显示
         /// </summary>
+        [DefaultValue("null")]
         public string Show
         {
             get { return _show; }
@@ -22,6 +20,7 @@ namespace EChartsOption.Component.Toolbox
         /// <summary>
         /// 文本描述
         /// </summary>
+        [DefaultValue("null")]
         public string Title
         {
             get { return _title; }

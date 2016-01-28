@@ -1,9 +1,12 @@
-﻿namespace EChartsOption.Component.Timeline.Style
+﻿using System.ComponentModel;
+
+namespace EChartsOption.Component.Timeline.Style
 {
     public class ControlStyleNormal
     {
-        private string _color = "#333";
+        private string _color = "null";
 
+        [DefaultValue("null")]
         public string Color
         {
             get { return _color;}

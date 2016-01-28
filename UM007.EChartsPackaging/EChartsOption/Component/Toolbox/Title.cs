@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel;
 
 namespace EChartsOption.Component.Toolbox
 {
     public class Title
     {
-        private string _mark = "辅助线开关";
-        private string _markUndo = "删除辅助线";
-        private string _markClear = "清空辅助线";
+        private string _mark = "null";
+        private string _markUndo = "null";
+        private string _markClear = "null";
 
         /// <summary>
         ///辅助线开关 
         /// </summary>
+        [DefaultValue("null")]
         public string Mark
         {
             get { return _mark; }
@@ -23,6 +21,7 @@ namespace EChartsOption.Component.Toolbox
         /// <summary>
         /// 删除辅助线
         /// </summary>
+        [DefaultValue("null")]
         public string MarkUndo
         {
             get { return _markUndo; }
@@ -32,6 +31,7 @@ namespace EChartsOption.Component.Toolbox
         /// <summary>
         /// 清空辅助线
         /// </summary>
+        [DefaultValue("null")]
         public string MarkClear
         {
             get { return _markClear; }

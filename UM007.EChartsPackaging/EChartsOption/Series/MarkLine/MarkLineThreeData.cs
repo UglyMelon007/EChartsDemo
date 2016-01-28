@@ -2,7 +2,7 @@
 
 namespace EChartsOption.Series.MarkLine
 {
-    public class MarkLineThreeData
+    public class MarkLineThreeData : MarkLineData
     {
         private string _type = "null";
         private string _name = "null";

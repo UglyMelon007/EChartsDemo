@@ -10,6 +10,8 @@ using EChartsOption.Component.Tooltip;
 using EChartsOption.Series;
 using EChartsOption.Series.MarkLine;
 using EChartsOption.Series.MarkPoint;
+using EChartsOption.Series.SeriesDataType;
+using EChartsOption.Series.SeriesType;
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
@@ -45,6 +47,7 @@ namespace UM007.EChartsPackaging.UnitTest
                      DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore,//去掉默认值
                      ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver(),//属性名字首字母小写
                  });
+            json = json.Replace("dataGroup", "data");
         }
 
         /// <summary>
@@ -61,15 +64,35 @@ namespace UM007.EChartsPackaging.UnitTest
             mp.Data = new MarkPointData[] { markPointData, markPointDataT };
             series.MarkPoint = mp;
 
-            MarkLine mk = new MarkLine();
-            MarkLineDataThree markLineData = new MarkLineDataThree();
-            MarkLineThreeData data = new MarkLineThreeData { Name = "hello", Type = "average" };
-            markLineData.Data = new[] { data };
-            mk.Data = new[] { markLineData };
-            series.MarkLine = mk;
+            MarkLine ml = new MarkLine
+            {
+                //Data = new MarkLineData[]
+                //{
+                //    new MarkLineDataThree {Name = "最小", Type = "min"},
+                //    new MarkLineDataThree {Name = "最大", Type = "max"},
+                //    new MarkLineDataThree {Name = "平均", Type = "average"},
+                //},
+                DataGroup = new MarkLineData[,]
+                {
+                    {
+                         new MarkLineDataThree {Name = "最小", Type = "min"},
+                    new MarkLineDataThree {Name = "最大", Type = "max"},
+                    }
+                },
+            };
+            series.MarkLine = ml;
 
-            SeriesDataOne seriesData = new SeriesDataOne { Value = "12" };
-            series.Data = new SeriesData[] { seriesData };
+            series.Data = new SeriesData[]
+            {
+                new SeriesDataOne{Value = "12"},
+                new SeriesDataOne{Value = "11"},
+                new SeriesDataOne{Value = "13"},
+                new SeriesDataOne{Value = "14"},
+                new SeriesDataOne{Value = "12"},
+                new SeriesDataOne{Value = "18"},
+                new SeriesDataOne{Value = "19"},
+                new SeriesDataOne{Value = "22"},
+            };
             option.Series = new Series[] { series };
         }
 
@@ -91,8 +114,15 @@ namespace UM007.EChartsPackaging.UnitTest
             option.Legend = legend;
 
             EChartsComponentAxis xAxis = new EChartsComponentAxis { Type = "category", BoundaryGap = "false" };
-            AxisData axisData = new AxisData { Value = "周一" };
-            xAxis.Data = new[] { axisData };
+            xAxis.Data = new[] {
+                new AxisData{Value ="Monday"}, 
+                new AxisData{Value ="Tuesday"},
+                new AxisData{Value="Wednesday"},
+                new AxisData{Value = "Thursday"},
+                new AxisData{Value = "Friday"},
+                new AxisData{Value = "Saturday"},
+                new AxisData{Value = "Sunday"}
+            };
             option.XAxis = xAxis;
 
             EChartsComponentAxis yAxis = new EChartsComponentAxis { Type = "value" };
@@ -103,6 +133,16 @@ namespace UM007.EChartsPackaging.UnitTest
             EChartsComponentToolbox toolbox = new EChartsComponentToolbox();
             toolbox.Show = "true";
             Feature feature = new Feature();
+            Mark mark = new Mark { Show = "true" };
+            DataView dataView = new DataView { Show = "true", ReadOnly = "false" };
+            MagicType magicType = new MagicType { Show = "true", Type = new[] { "line", "bar" } };
+            Restore restore = new Restore { Show = "true" };
+            SaveAsImage saveAsImage = new SaveAsImage { Show = "true" };
+            feature.Mark = mark;
+            feature.DataView = dataView;
+            feature.MagicType = magicType;
+            feature.Restore = restore;
+            feature.SaveAsImage = saveAsImage;
             toolbox.Feature = feature;
             option.Toolbox = toolbox;
         }

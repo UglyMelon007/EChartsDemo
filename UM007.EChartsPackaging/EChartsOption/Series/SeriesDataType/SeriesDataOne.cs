@@ -2,7 +2,7 @@
 using EChartsOption.Component.Tooltip;
 using EChartsOption.Style;
 
-namespace EChartsOption.Series
+namespace EChartsOption.Series.SeriesDataType
 {
     /// <summary>
     /// 系列中的数据内容数组，

@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel;
 
 namespace EChartsOption.Component.Toolbox
 {
     public class SaveAsImage
     {
-        private string _show = "true";
+        private string _show = "null";
         private string _name = "UglyMelon007";
-        private string _title = "保存为图片";
-        private string _type = "png";
-        private string _lang = "点击保存";
+        private string _title = "null";
+        private string _type = "null";
+        private string _lang = "null";
 
         /// <summary>
         /// 是否显示
         /// </summary>
+        [DefaultValue("null")]
         public string Show
         {
             get { return _show; }
@@ -25,6 +23,7 @@ namespace EChartsOption.Component.Toolbox
         /// <summary>
         /// 图片保存的名字
         /// </summary>
+        [DefaultValue("UglyMelon007")]
         public string Name
         {
             get { return _name; }
@@ -34,6 +33,7 @@ namespace EChartsOption.Component.Toolbox
         /// <summary>
         /// 标题
         /// </summary>
+        [DefaultValue("null")]
         public string Title
         {
             get { return _title; }
@@ -43,6 +43,7 @@ namespace EChartsOption.Component.Toolbox
         /// <summary>
         /// 默认保存图片类型为'png'，需改为'jpeg'
         /// </summary>
+        [DefaultValue("null")]
         public string Type
         {
             get { return _type; }
@@ -52,6 +53,7 @@ namespace EChartsOption.Component.Toolbox
         /// <summary>
         /// 非IE浏览器支持点击下载，有保存话术，默认是“点击保存”，可修改
         /// </summary>
+        [DefaultValue("null")]
         public string Lang
         {
             get { return _lang; }

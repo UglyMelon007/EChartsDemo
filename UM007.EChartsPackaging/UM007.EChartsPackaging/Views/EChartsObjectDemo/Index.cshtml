@@ -1,0 +1,39 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>EChartsDemo</title>
+    <script src="~/Scripts/jquery-2.2.0.min.js"></script>
+    <script src="~/Scripts/ECharts/echarts-all.js"></script>
+    <script>
+        $(function() {
+            var myChart = echarts.init(document.getElementById('divTemplate'));
+            myChart.showLoading({
+                text: '数据加载中。。。。',
+                effect: 'dynamicLine',
+                textStyle: {
+                    fontSize: 20
+                }
+            });
+
+            $.post("EChartsObjectDemo/GetOption", function(data) {
+                setTimeout(function () {
+                    myChart.hideLoading();
+                    myChart.setOption($.parseJSON(data));
+                }, 1000);
+
+            });
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <div id="divTemplate" style="width:900px; height:400px; "></div>
+    </div>
+</body>
+</html>

@@ -1,15 +1,18 @@
-﻿namespace EChartsOption.Series.MarkLine
+﻿using System.ComponentModel;
+
+namespace EChartsOption.Series.MarkLine
 {
     public class StartOne
     {
-        private string _name = "";
-        private string _value = "";
-        private string _x = "";
-        private string _y = "";
+        private string _name = "null";
+        private string _value = "null";
+        private string _x = "null";
+        private string _y = "null";
 
         /// <summary>
         /// 名称
         /// </summary>
+        [DefaultValue("null")]
         public string Name
         {
             get { return _name; }
@@ -19,6 +22,7 @@
         /// <summary>
         /// 值
         /// </summary>
+        [DefaultValue("null")]
         public string Value
         {
             get { return _value; }
@@ -28,6 +32,7 @@
         /// <summary>
         /// x坐标
         /// </summary>
+        [DefaultValue("null")]
         public string X
         {
             get { return _x; }
@@ -37,6 +42,7 @@
         /// <summary>
         /// y坐标
         /// </summary>
+        [DefaultValue("null")]
         public string Y
         {
             get { return _y; }

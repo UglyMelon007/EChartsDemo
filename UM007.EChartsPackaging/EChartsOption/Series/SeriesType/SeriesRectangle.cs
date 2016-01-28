@@ -1,7 +1,10 @@
 ﻿using System.ComponentModel;
 
-namespace EChartsOption.Series
+namespace EChartsOption.Series.SeriesType
 {
+    /// <summary>
+    /// 驱动图表生成的数据内容数组，数组中每一项为一个系列的选项及数据，其中个别选项仅在部分图表类型中有效，请注意适用类型
+    /// </summary>
     public class SeriesRectangle : Series
     {
         private string _stack = "null";

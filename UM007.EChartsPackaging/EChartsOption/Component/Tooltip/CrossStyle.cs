@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel;
 
 namespace EChartsOption.Component.Tooltip
 {
     public class CrossStyle
     {
-        private string _color = "#1e90ff";
-        private string _width = "1";
-        private string _type = "dashed";
+        private string _color = "null";
+        private string _width = "null";
+        private string _type = "null";
 
         /// <summary>
         /// 颜色
         /// </summary>
+        [DefaultValue("null")]
         public string Color
         {
             get { return _color; }
@@ -23,6 +21,7 @@ namespace EChartsOption.Component.Tooltip
         /// <summary>
         /// 宽度
         /// </summary>
+        [DefaultValue("null")]
         public string Width
         {
             get { return _width; }
@@ -32,6 +31,7 @@ namespace EChartsOption.Component.Tooltip
         /// <summary>
         /// 类型
         /// </summary>
+        [DefaultValue("null")]
         public string Type
         {
             get { return _type; }

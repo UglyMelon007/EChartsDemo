@@ -1,4 +1,6 @@
-﻿namespace EChartsOption.Series.MarkLine
+﻿using System.ComponentModel;
+
+namespace EChartsOption.Series.MarkLine
 {
     /// <summary>
     /// 更为实用的，在折线、柱形、散点图中，可以直接使用如下几个开箱即用的特殊点作为标线类型
@@ -19,15 +21,27 @@
     /// </summary>
     public class MarkLineDataThree : MarkLineData
     {
-        private MarkLineThreeData[] _data = new MarkLineThreeData[] { };
+        private string _type = "null";
+        private string _name = "null";
 
         /// <summary>
-        /// 线的东西。。。。
+        /// 标注类型
         /// </summary>
-        public MarkLineThreeData[] Data
+        [DefaultValue("null")]
+        public string Type
         {
-            get { return _data; }
-            set { _data = value; }
+            get { return _type; }
+            set { _type = value; }
+        }
+
+        /// <summary>
+        /// 标注名字
+        /// </summary>
+        [DefaultValue("null")]
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
         }
     }
 }

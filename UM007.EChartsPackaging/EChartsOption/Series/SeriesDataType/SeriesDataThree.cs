@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel;
 
-namespace EChartsOption.Series
+namespace EChartsOption.Series.SeriesDataType
 {
     /// <summary>
     /// 当图表类型为饼图时，需要说明每部分数据的名称name，可设置选中状态

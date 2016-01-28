@@ -1,17 +1,18 @@
-﻿using EChartsOption.Style;
+﻿using System.ComponentModel;
+using EChartsOption.Style;
 
 namespace EChartsOption.Component.Timeline.Style
 {
     public class ControlStyle : EChartsStyle
     {
-        private string _itemSize = "15";
-        private string _itemGap = "5";
-        private ControlStyleNormal _normal = new ControlStyleNormal();
-        private ControlStyleEmphasis _emphasis = new ControlStyleEmphasis();
+        #region 字符串属性
+        private string _itemSize = "null";
+        private string _itemGap = "null";
 
         /// <summary>
         /// 按钮大小
         /// </summary>
+        [DefaultValue("null")]
         public string ItemSize
         {
             get { return _itemSize; }
@@ -21,28 +22,24 @@ namespace EChartsOption.Component.Timeline.Style
         /// <summary>
         /// 按钮间隔
         /// </summary>
+        [DefaultValue("null")]
         public string ItemGap
         {
             get { return _itemGap; }
             set { _itemGap = value; }
-        }
+        } 
+        #endregion
 
+        #region 对象属性
         /// <summary>
         /// 正常颜色
         /// </summary>
-        public ControlStyleNormal Normal
-        {
-            get { return _normal; }
-            set { _normal = value; }
-        }
+        public ControlStyleNormal Normal { get; set; }
 
         /// <summary>
         /// 高亮颜色
         /// </summary>
-        public ControlStyleEmphasis Emphasis
-        {
-            get { return _emphasis; }
-            set { _emphasis = value; }
-        }
+        public ControlStyleEmphasis Emphasis { get; set; } 
+        #endregion
     }
 }
