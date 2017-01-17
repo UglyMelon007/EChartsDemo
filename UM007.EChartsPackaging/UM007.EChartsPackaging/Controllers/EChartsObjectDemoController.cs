@@ -5,13 +5,13 @@ using EChartsOption.Component.Legend;
 using EChartsOption.Component.Title;
 using EChartsOption.Component.Toolbox;
 using EChartsOption.Component.Tooltip;
-using EChartsOption.Series;
 using EChartsOption.Series.MarkLine;
 using EChartsOption.Series.MarkPoint;
 using EChartsOption.Series.SeriesDataType;
 using EChartsOption.Series.SeriesType;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using AxisLabel = EChartsOption.Component.Axis.AxisLabel;
 
 namespace UM007.EChartsPackaging.Controllers
 {

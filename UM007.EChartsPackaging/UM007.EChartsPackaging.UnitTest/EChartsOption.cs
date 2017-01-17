@@ -1,20 +1,18 @@
-﻿using System;
-using System.Text.RegularExpressions;
-using EChartsOption;
+﻿using EChartsOption;
 using EChartsOption.Component;
 using EChartsOption.Component.Axis;
 using EChartsOption.Component.Legend;
 using EChartsOption.Component.Title;
 using EChartsOption.Component.Toolbox;
 using EChartsOption.Component.Tooltip;
-using EChartsOption.Series;
 using EChartsOption.Series.MarkLine;
 using EChartsOption.Series.MarkPoint;
 using EChartsOption.Series.SeriesDataType;
 using EChartsOption.Series.SeriesType;
-using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using AxisLabel = EChartsOption.Component.Axis.AxisLabel;
 
 namespace UM007.EChartsPackaging.UnitTest
 {
@@ -41,11 +39,11 @@ namespace UM007.EChartsPackaging.UnitTest
             OptionAttribute(option);
             OptionComponent(option);
             OptionSeries(option);
-            string json = JsonConvert.SerializeObject(option, Newtonsoft.Json.Formatting.Indented,
-                 new Newtonsoft.Json.JsonSerializerSettings
+            string json = JsonConvert.SerializeObject(option, Formatting.Indented,
+                 new JsonSerializerSettings
                  {
-                     DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore,//去掉默认值
-                     ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver(),//属性名字首字母小写
+                     DefaultValueHandling = DefaultValueHandling.Ignore,//去掉默认值
+                     ContractResolver = new CamelCasePropertyNamesContractResolver(),//属性名字首字母小写
                  });
             json = json.Replace("dataGroup", "data");
         }
