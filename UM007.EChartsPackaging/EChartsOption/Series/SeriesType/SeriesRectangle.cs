@@ -13,7 +13,7 @@ namespace EChartsOption.Series.SeriesType
         private string _barGap = "null";
         private string _barCategoryGap = "null";
         private string _barMinHeight = "null";
-        private string _barWidth = "null";
+        private int _barWidth = 1;
         private string _barMaxWidth = "null";
         private string _symbol = "null";
         private string _symbolSize = "null";
@@ -88,8 +88,8 @@ namespace EChartsOption.Series.SeriesType
         /// <summary>
         /// 柱条（K线蜡烛）宽度，不设时自适应
         /// </summary>
-        [DefaultValue("null")]
-        public string BarWidth
+        [DefaultValue(1)]
+        public int BarWidth
         {
             get { return _barWidth; }
             set { _barWidth = value; }
